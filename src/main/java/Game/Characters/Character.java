@@ -230,7 +230,7 @@ public class Character {
     }
 
     /**
-     * Returns the encoded string of player attributes to be saved
+     * Returns the encoded string of character attributes to be saved
      * @return encoded string
      */
     public String toText() {
