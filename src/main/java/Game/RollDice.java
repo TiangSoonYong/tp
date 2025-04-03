@@ -40,8 +40,7 @@ public class RollDice {
         first_dice = rand.nextInt(MAX - MIN + 1) + MIN;
         second_dice = rand.nextInt(MAX - MIN + 1) + MIN;
 
-        printDiceImage(first_dice);
-        printDiceImage(second_dice);
+        printDiceImages(first_dice, second_dice);
 
         return first_dice + second_dice;
     }
@@ -73,6 +72,35 @@ public class RollDice {
             break;
         }
     }
+
+    /**
+     * Prints a list of dices side-by-side
+     * 
+     * @param diceValues list of integer values representing rolled dice value
+     */
+    public static void printDiceImages(int... diceValues) {
+        // Store dice faces as 2D string arrays (each die is 5x7 or similar)
+        String[][] diceFaces = {
+            UI.DIE_FACE_1.split("\n"),
+            UI.DIE_FACE_2.split("\n"),
+            UI.DIE_FACE_3.split("\n"),
+            UI.DIE_FACE_4.split("\n"),
+            UI.DIE_FACE_5.split("\n"),
+            UI.DIE_FACE_6.split("\n")
+        };
+    
+        // Get the height of the dice face
+        int faceHeight = diceFaces[0].length; 
+    
+        // Print the dice line by line
+        for (int row = 0; row < faceHeight; row++) {
+            for (int diceValue : diceValues) {
+                System.out.print(diceFaces[diceValue - 1][row] + "  "); // Print each line with spacing
+            }
+            System.out.println(); // Move to next row
+        }
+    }
+    
 
     /**
      * Return the effect of rolling dice.

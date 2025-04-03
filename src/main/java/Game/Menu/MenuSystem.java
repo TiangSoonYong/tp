@@ -14,9 +14,9 @@ public class MenuSystem {
     public MenuSystem() {
         try {
             terminal = new DefaultTerminalFactory().createTerminal();
-            terminal.enterPrivateMode();
-            terminal.clearScreen();
-            terminal.setCursorVisible(false);
+            // terminal.enterPrivateMode();
+            // terminal.clearScreen();
+            // terminal.setCursorVisible(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,6 +34,15 @@ public class MenuSystem {
             boolean shouldExit = action.execute();
             if (shouldExit) return true;
         }
+    }
+
+    public void reinitializeTerminal() throws IOException {
+        // Close old terminal
+        if (this.terminal != null) {
+            this.terminal.close();
+        }
+        // Create fresh terminal instance
+        this.terminal = new DefaultTerminalFactory().createTerminal();
     }
 
     public void exitPrivateMode() {

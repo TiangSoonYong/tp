@@ -37,4 +37,13 @@ public class EnemyDatabase {
         }
         throw new RolladieException("Enemy not found!");
     }
+
+    /**
+     * Selects enemy by given index
+     * @param index
+     * @return Enemy object
+     */
+    public static Enemy getEnemyByIndex(int index) {
+        return enemyList.get(index);
+    }
 }

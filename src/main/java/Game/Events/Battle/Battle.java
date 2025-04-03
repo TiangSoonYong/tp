@@ -3,6 +3,7 @@ package Game.Events.Battle;
 import Exceptions.RolladieException;
 import Functionalities.UI.BattleUI;
 import Game.Characters.Enemy;
+import Game.Characters.EnemyDatabase;
 import Game.Characters.Player;
 import Game.Events.Event;
 
@@ -39,10 +40,10 @@ public class Battle extends Event {
     }
 
 
-    public Battle(Player player) {
+    public Battle(Player player, int turn) {
         super(player);
         int[] enemyHealth = {50};
-        this.enemy = new Enemy(enemyHealth, 15, 5, "Goblin");
+        this.enemy = EnemyDatabase.getEnemyByIndex(turn);
         this.hasWon = false;
     }
 
