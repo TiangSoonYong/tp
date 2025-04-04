@@ -14,13 +14,13 @@
     - [8. End shopping](#8-end-shopping-)
     - [9. Ending the game prematurely](#9-ending-the-game-prematurely-)
 -[Command Summary](#command-summary)
-- [FAQ](#faq)
+
 
 ## Introduction      
 
 RollaDie is a Dungeon & Dragons (DnD) text-based RPG,
 optimized to play using Command Line Interface (CLI) and has a simple text-ui display that reminisces games of the 1960s.
-This program is meant for CS2113 students as a stress reliever and it aims to provide a fun and replayable experience!
+This program is meant for CS2113 students as a stress reliever, and it aims to provide a fun and replayable experience!
 
 
 ## Quick Start      
@@ -33,19 +33,19 @@ This program is meant for CS2113 students as a stress reliever and it aims to pr
     - Run the jar file with the command: `java -jar "{file_name}"`
 
 ## Features   
+> [!NOTE]            
+> The dice outcome listed below are randomly generated, meaning the results will vary each time.         
+> As a result, the damage dealt will also differ with each roll.
 
 ### 1. Starting a new game     
 Initialise a new game instance.
 
-Command: `start`
+- Press the run button in the top right corner to run the application.
+- Use the `up`, `down` and `enter` key to select `start game`
 
-Example usage:           
-```
-start                
-======================================================================             
-Narrator: A villainous Goblin stands in your way!        
-======================================================================
-```
+Example outcome:
+![game start](uml_image/gameStartMenu.png)
+
 
 ### 2. Load previous game  
 Players can load previously saved game 
@@ -181,21 +181,12 @@ Example usage:
 
 ## Command Summary
 
-* Start game `start`
-* Load previous game: `load`
+* Load previous game: `load` {To be updated}       
 * Attack an enemy `attack`
-* Defend against attacks `defend`
-* Surrender early: `flee`
-* Buy equipment: `buy`
-* Sell equipment: `sell`
-* End shopping: `leave`
-* End game prematurely `exit`
+* Defend against attacks `defend` 
+* Surrender early: `flee` {To be updated}     
+* Buy equipment: `buy` {To be updated}     
+* Sell equipment: `sell` {To be updated}     
+* End shopping: `leave` {To be updated}        
+* End game prematurely `exit` {To be updated}      
 
-
-
-## FAQ
-{To be updated}
-
-**Q**: How do I transfer my data to another computer?
-
-**A**: {your answer here}

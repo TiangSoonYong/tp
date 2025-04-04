@@ -1,0 +1,68 @@
+@startuml
+hide footbox
+
+actor User
+participant "Parser" as Parser
+participant "UI" as UI
+participant "Battle" as Battle
+participant "BattleLogic" as BattleLogic
+participant "PlayerTurn" as PlayerTurn
+participant "EnemyTurn" as EnemyTurn
+participant "RollDice" as RollDice
+participant "Enemy" as Enemy
+participant "Player" as Player
+participant "BattleUI" as BattleUI
+participant "Character" as Character
+
+
+
+loop Until Battle Ends
+
+    alt playerTurn is true
+
+        activate PlayerTurn
+        PlayerTurn -> PlayerTurn: getCurrAction(inputString)
+        PlayerTurn -> Parser: readInput()
+        User -> Parser: enter command
+        Parser --> PlayerTurn: return inputString
+
+
+
+        PlayerTurn -> RollDice: rollDice()
+        RollDice --> PlayerTurn: return diceValue
+        PlayerTurn -> RollDice: diceOutcome(diceValue)
+        RollDice --> PlayerTurn: return diceOutcome
+
+        PlayerTurn -> Player: setAttackBonus(diceOutcome)
+        PlayerTurn -> Character: attack(enemy)
+        Character -> Character: calculateDamage(enemy)
+        Character --> Enemy: takeDamage(damage)
+        PlayerTurn -> BattleUI: printPlayerAttack(player, enemy, damage)
+
+        PlayerTurn -> BattleLogic: checkBattleEnd(turn)
+        deactivate PlayerTurn
+
+    else playerTurn is false
+        BattleLogic -> EnemyTurn: new EnemyTurn(player, enemy)
+        activate EnemyTurn
+
+        EnemyTurn -> EnemyTurn: handleAction()
+        EnemyTurn -> Character: enemy.attack(player)
+        Character -> Character: calculateDamage(player)
+        Character --> Player: takeDamage(damage)
+
+        EnemyTurn -> BattleUI: printEnemyAttack(enemy, player, damage)
+
+        EnemyTurn -> UI: printCharacterInfo(player)
+        EnemyTurn -> UI: printCharacterInfo(enemy)
+        EnemyTurn -> BattleLogic: checkBattleEnd(turn)
+        deactivate EnemyTurn
+    end
+
+    BattleLogic -> BattleLogic: checkBattleEnd()
+end
+deactivate BattleLogic
+Battle -> BattleUI: battleExit(player, enemy)
+
+@enduml
+

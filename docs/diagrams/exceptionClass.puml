@@ -1,0 +1,16 @@
+@startuml
+hide circle
+
+
+class Exception {
+}
+
+class RolladieException {
+    +RolladieException(String message)
+}
+
+RolladieException --|> Exception
+@enduml
+
+
+@enduml

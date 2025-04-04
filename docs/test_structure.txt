@@ -1,0 +1,26 @@
+Folder PATH listing for volume Local Disk
+Volume serial number is A43C-0BC4
+C:.
+|   test_structure.txt
+|   
++---data
+|   \---StorageTest
+|           ValidData.txt
+|           
+\---java
+    +---game
+    |   |   GameTest.java
+    |   |   RolladieTest.java
+    |   |   RollDiceTest.java
+    |   |   
+    |   +---Battle
+    |   |       BattleTest.java
+    |   |       
+    |   +---Characters
+    |   |       CharacterTest.java
+    |   |       
+    |   \---functionalities
+    |           UITest.java
+    |           
+    \---seedu
+        \---duke

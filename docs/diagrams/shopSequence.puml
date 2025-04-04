@@ -1,0 +1,81 @@
+@startuml
+
+actor User
+participant "Main" as Main
+participant "Game" as Game
+participant "Shop" as Shop
+
+participant "Player" as Player
+participant "EquipmentList" as EquipmentList
+participant "Equipment" as Equipment
+participant "ShopUI" as ShopUI
+
+User -> Main: Start game
+Main -> Game: game.run()
+Game -> Shop: currentEvent.run()
+activate Shop
+Shop -> ShopUI: printShopEntry()
+Shop -> Shop: startShopping()
+loop Until Player Leaves Shop
+    Shop -> ShopUI: printShopCollection(player, equipments)
+    activate ShopUI
+    ShopUI -> Player: toString()
+    deactivate ShopUI
+    Shop -> Shop: handleAction()
+    Shop -> Shop: getCurrAction()
+
+    alt "buy" action
+        Shop -> Player: buyEquipment(equipment)
+        activate Player
+        Player -> EquipmentList: addEquipment(equipment)
+        Player -> Equipment: getValue()
+        activate Equipment
+        Equipment --> Player: return value
+        deactivate Equipment
+        Player -> Player: spendGold(value)
+        deactivate Player
+        Player -> ShopUI: printBuyEquipment(equipment)
+        activate ShopUI
+        ShopUI -> Equipment: getName()
+        activate Equipment
+        Equipment --> ShopUI: return name
+        deactivate Equipment
+        ShopUI -> Equipment: getValue()
+        activate Equipment
+        Equipment --> ShopUI: return value
+        deactivate Equipment
+        deactivate ShopUI
+    else "sell" action
+        Shop -> Player: sellEquipment(equipmentType)
+        activate Player
+        Player -> EquipmentList: removeEquipment(equipmentType)
+        Player -> EquipmentList: getEquipment(equipmentType)
+        activate EquipmentList
+        EquipmentList --> Player: return equipment
+        deactivate EquipmentList
+        Player -> Equipment: getValue()
+        activate Equipment
+        Equipment --> Player: return value
+        deactivate Equipment
+        Player -> Player: earnGold(value / 2)
+        deactivate Player
+        Player -> ShopUI: printSellEquipment(equipment)
+        activate ShopUI
+        ShopUI -> Equipment: getName()
+        activate Equipment
+        Equipment --> ShopUI: return name
+        deactivate Equipment
+        ShopUI -> Equipment: getValue()
+        activate Equipment
+        Equipment --> ShopUI: return value
+        deactivate Equipment
+        deactivate ShopUI
+    else "leave" action
+        Shop -> Shop: set isDone=true
+    end
+end
+Shop -> ShopUI: printShopExit()
+deactivate Shop
+
+
+@enduml
