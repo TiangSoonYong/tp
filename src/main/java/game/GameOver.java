@@ -1,3 +1,4 @@
+/*
 package game;
 
 import functions.UI.GameOverUI;
@@ -21,3 +22,4 @@ public class GameOver {
         }
     }
 }
+*/

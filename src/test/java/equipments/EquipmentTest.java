@@ -88,6 +88,11 @@ public class EquipmentTest {
         }
 
         @Override
+        public String toText() {
+            return "";
+        }
+
+        @Override
         public int getId() {
             return 0;
         }

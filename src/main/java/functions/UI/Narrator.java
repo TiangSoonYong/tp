@@ -31,18 +31,16 @@ public class Narrator {
         double hpPercentBefore = previousDefenderHp / (double) defender.maxHp;
         double hpPercentAfter = defender.hp / (double) defender.maxHp;
     
-        if (damageDealt >= 30) {
+        if (damageDealt >= 12) {
             TypewriterEffect.print("[Narrator] 💥 Massive impact! " + attacker.name + " lands a crushing hit!", END_DELAY);
-        } else if (damageDealt >= 15) {
+        } else if (damageDealt >= 8) {
             TypewriterEffect.print("[Narrator] 😲 " + attacker.name + " delivers a powerful strike!", END_DELAY);
         }
-        else {
-            TypewriterEffect.print("[Narrator] 😲 " + attacker.name + " delivers a mediocre blow.", END_DELAY);
-        }
+    
         // Comeback detection
         double attackerHp = attacker.hp / (double) attacker.maxHp;
         double defenderHp = defender.hp / (double) defender.maxHp;
-        if (attackerHp < 0.3 && defenderHp > 0.7 && damageDealt > 30) {
+        if (attackerHp < 0.3 && defenderHp > 0.7 && damageDealt > 8) {
             TypewriterEffect.print("[Narrator] 🤯 Unbelievable! " + attacker.name + " fights back against the odds!", END_DELAY);
         }
     
@@ -60,14 +58,6 @@ public class Narrator {
         if (defender.hp <= 3 && defender.hp > 0) {
             TypewriterEffect.print("[Narrator] 😬 " + defender.name + " barely survives with a sliver of health!", END_DELAY);
         }
-    }
-
-    public static void commentOnLootEntry() {
-        TypewriterEffect.print("[Narrator] As you won, here's your loot after the battle!");
-    }
-
-    public static void commentOnLootDefeat() {
-        TypewriterEffect.print("[Narrator] As you did not win, you don't deserve loot!");
     }
 
     public static void commentOnShopEntry() {

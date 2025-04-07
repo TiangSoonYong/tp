@@ -1,3 +1,4 @@
+
 //@@author vincesum
 package equipments.weapons;
 
@@ -20,22 +21,12 @@ public class WeaponDatabase {
         weaponList.add(new Weapon("Iron Sword", 0, 20, 0, 10));
         weaponList.add(new Weapon("Kunai", 0, 30, 0, 20));
         weaponList.add(new Weapon("Executioner's Axe", 0, 40, 0, 30));
-        weaponList.add(new Weapon("Dragon Tooth Sword", 0, 60, 0, 50));
+        weaponList.add(new Weapon("Dragon Tooth Sword", 0, 50, 0, 40));
     }
-
 
     public static ArrayList<Weapon> getAllWeapon() {
         return weaponList;
     }
-
-    // public static int getIndexByName(String name) throws RolladieException {
-    //     for (int i = 0; i < weaponList.size(); i++) {
-    //         if (weaponList.get(i).getName().equalsIgnoreCase(name)) {
-    //             return i;
-    //         }
-    //     }
-    //     throw new RolladieException("Armor not found!");
-    // }
 
     /**
      * Find Weapon based on weaponName

@@ -56,16 +56,6 @@ public class Player {
         this.gold = 0;
     }
 
-    public Player(String name, int maxHp, int baseAttack, int numDice, List<Equipment> equipmentList, boolean isHuman, int gold) {
-        this.name = name;
-        this.hp = this.maxHp = maxHp;
-        this.baseAttack = baseAttack;
-        this.diceRolls = new int[numDice];
-        this.equipmentList = equipmentList;
-        this.isHuman = isHuman;
-        this.gold = gold;
-    }
-
     public Player(String name, int maxHp, int baseAttack) {
         this.name = name;
         this.hp = this.maxHp = maxHp;
@@ -105,8 +95,11 @@ public class Player {
                 .sum();
     }
 
-    public Equipment getEquipment(int equipmentType) {
+    public Equipment getEquipment(int equipmentType) throws RolladieException {
         Equipment currSlot = equipmentList.get(equipmentType);
+        if (currSlot.getId() == -1) {
+            throw new RolladieException("Equipment is not equipped!");
+        }
         return currSlot;
     }
 

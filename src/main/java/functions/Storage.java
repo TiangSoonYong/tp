@@ -1,11 +1,13 @@
 package functions;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import equipments.Equipment;
 import equipments.armors.Armor;
@@ -59,6 +61,7 @@ public class Storage {
 
             fw.close();
             UI.printMessage("✅ Game saved to save slot " + saveSlot);
+            UI.halt();
         } catch (IOException e) {
             throw new RolladieException("❌ Save failed: " + e.getMessage());
         }
@@ -73,19 +76,20 @@ public class Storage {
         String filename = FILE_NAME + saveSlot + FILE_TYPE;
         File f = new File(FILE_DIRECTORY + filename);
         try {
+            Scanner s = new Scanner(f);
+            int wave = Integer.parseInt(s.nextLine().trim());
 
-            int wave = Integer.parseInt(UI.storageWave());
-
-            String[] playerData = UI.storagePlayerData(LOAD_DELIMITER);
+            String[] playerData = s.nextLine().split(LOAD_DELIMITER);
             Player player = parsePlayerFromText(wave, playerData);
 
             UI.printMessage("✅ Game loaded from save slot " + saveSlot);
             return new Game(player, wave);
 
-        // } catch (FileNotFoundException e) {
-        //     throw new RolladieException("savefile.txt not found!");
+        } catch (FileNotFoundException e) {
+             throw new RolladieException("savefile.txt not found!");
         } catch (RolladieException e) {
             UI.printErrorMessage("❌ Load failed: " + e.getMessage() + "\nStarting new game instead");
+            UI.halt();
         }
         return new Game();
     }

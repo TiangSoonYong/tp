@@ -1,0 +1,55 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package functions {
+    class Storage {
+        -{static} final FILE_DIRECTORY: String
+        -{static} final FILE_NAME: String
+        -{static} final FILE_TYPE: String
+        -{static} final LOAD_DELIMITER: String
+        +{static} final SAVE_DELIMITER: String
+
+        +{static}saveGame(saveSlot: int, wave: int, player: Player):
+        +{static}loadGame(saveSlot: int): Game
+        -{static}parsePlayerFromText(wave: int, playerData: String[]): Player
+        -{static}parseEquipmentListFromText(equipmentsData: String[]): List<Equipment>
+    }
+}
+package players {
+    class Player {
+        +toText():String
+    }
+}
+package equipments {
+    class "{abstract} \n Equipment" {
+        +toText():String { abstract }
+    }
+    class Weapon {
+        +toText():String
+    }
+    class Boots {
+        +toText():String
+    }
+    class Armor {
+        +toText():String
+    }
+}
+
+package game {
+    class Game {
+        wave: int
+        -saveGame(): void
+    }
+}
+
+Game ->"1" Player
+Player ->"3" "{abstract} \n Equipment" : Has list of >
+
+Weapon --|> "{abstract} \n Equipment"
+Boots --|> "{abstract} \n Equipment"
+Armor --|> "{abstract} \n Equipment"
+
+Storage --> Player
+
+@enduml

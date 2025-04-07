@@ -22,13 +22,6 @@ public class UI {
         SCANNER.nextLine();
     }
 
-    public static String storageWave() {
-        return SCANNER.nextLine().trim();
-    }
-
-    public static String[] storagePlayerData(String LOAD_DELIMITER) {
-        return SCANNER.nextLine().split(LOAD_DELIMITER);
-    }
 
     public static String readInput() {
         String inputLine = SCANNER.nextLine().toLowerCase();
@@ -98,7 +91,7 @@ public class UI {
         System.out.print("Choose save slot to load (1–3): ");
         int saveSlot = Integer.parseInt(readInput());
         while(saveSlot < 1 || saveSlot > 3) {
-            System.out.print("Out of range!");
+            System.out.println("Out of range!");
             System.out.print("Choose save slot to load (1–3): ");
             saveSlot = Integer.parseInt(readInput());
         }
@@ -118,8 +111,11 @@ public class UI {
         System.out.println(player.toString());
 
         System.out.println("🌊 Current Wave: " + wave);
-        System.out.println("\nPress Enter to continue...");
-        SCANNER.nextLine();
+        halt();
     }
 
+    public static void halt() {
+        System.out.println("Press Enter to continue...");
+        SCANNER.nextLine();
+    }
 }

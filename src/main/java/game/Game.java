@@ -12,7 +12,6 @@ import equipments.Equipment;
 import equipments.weapons.WeaponDatabase;
 import events.Battle;
 import events.Event;
-import functions.UI.GameOverUI;
 
 import java.util.Queue;
 import java.util.LinkedList;
@@ -95,8 +94,11 @@ public class Game {
                 UI.printErrorMessage(e.getMessage());
             }
         }
-        GameOver gameOver = new GameOver(hasWonCurrBattle);
-        gameOver.run();
+        if (!this.player.isAlive()) {
+            UI.printDeathMessage();
+        } else {
+            UI.printWinMessage();
+        }
     }
 
 
@@ -156,7 +158,7 @@ public class Game {
     /**
      * Calls the Storage class to save the current game status
      */
-    public void saveGame() throws RolladieException {
+    private void saveGame() throws RolladieException {
         UI.printMessage("💾 Save game? (y/n): ");
         String saveInput = UI.readInput();
         if (saveInput.equalsIgnoreCase("y")) {
