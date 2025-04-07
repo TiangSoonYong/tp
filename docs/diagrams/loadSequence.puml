@@ -12,7 +12,9 @@ participant ":Player" as Player
 User -> Rolladie: Load Game
 Rolladie -> Storage: Storage.loadGame(...)
 activate Storage
-
+ref over Storage
+    Get int wave data
+end ref
 Storage -> Storage: Parse Player Data
 activate Storage
     Storage -> Storage: Parse Player Equipments

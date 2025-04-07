@@ -296,23 +296,40 @@ within Rolladie game. It requires `Game` attributes, namely `Player` which has a
 to both implement the `toText()` method that returns an encoded string of data 
 which can then be written into the text save file.
 
-### 6. Load  
-{To be Updated}          
-
-**Overview**
-
-**Implementation Details**
-
-**Sequence Diagram**  
-![Sequence Diagram](uml_image/loadSequenceDiagram.png)
-### 7. Save       
-{To be Updated}            
-**Overview**
+### 6. Save
+**Overview**  
+The Save feature allows user to store their game data before proceeding into a `Battle` event.
 
 **Implementation Details**
+1. During standard running of the game, if the current event is a `Battle` event, it will prompt the user to save
+2. User can then input the save file number from **1 to 3**
+3. `Storage` class is then called to save the current `Game` progress
+4. `int wave` is first saved to record the current wave the user is in
+5. `player` is then converted into an encoded `String` of text 
+6. Since `player` has `equipments`, it is also converted into an encoded `String` of text 
+7. Lastly, the full encoded data of the player is then saved into a save file of the user choosing
 
 **Sequence Diagram**  
 ![Sequence Diagram](uml_image/saveSequenceDiagram.png)
+
+### 7. Load
+**Overview**  
+The Load feature provides user the option to restore their saved data within the `Rolladie` main menu
+
+**Implementation Details**
+1. User select to load game by inputting **2**
+2. User can then input the save file number from **1 to 3**
+3. `Storage` class is then called to load the save file
+4. `int wave` is first loaded to be used for generating events and player abilities
+5. `player` data is then parsed partially
+6. **3** equipments are then parsed from its databases to create player's `equipments`
+7. The `player` object can be fulled created with the loaded data
+8. Finally, the `game` object is created and its events generation is automatically performed
+
+In the scenario where the save file does not exists, `Rolladie` will simply start a new `Game`
+
+**Sequence Diagram**  
+![Sequence Diagram](uml_image/loadSequenceDiagram.png)
 
 ### 8. Shop
 {To be Updated}       
