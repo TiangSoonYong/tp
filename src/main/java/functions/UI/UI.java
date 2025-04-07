@@ -16,7 +16,11 @@ public class UI {
      */
     public static final String LINE_SEPARATOR = "=====================================================================";
 
-    private static final Scanner SCANNER = new Scanner(System.in);
+    public static final Scanner SCANNER = new Scanner(System.in);
+
+    public static void nextLine() {
+        SCANNER.nextLine();
+    }
 
 
     public static String readInput() {
@@ -107,8 +111,11 @@ public class UI {
         System.out.println(player.toString());
 
         System.out.println("🌊 Current Wave: " + wave);
-        System.out.println("\nPress Enter to continue...");
-        SCANNER.nextLine();
+        halt();
     }
 
+    public static void halt() {
+        System.out.println("Press Enter to continue...");
+        SCANNER.nextLine();
+    }
 }

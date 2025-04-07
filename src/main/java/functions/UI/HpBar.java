@@ -14,7 +14,8 @@ public class HpBar {
      * @param diceDisplay String to keep static on-screen before printing HP bars
      * @throws InterruptedException
      */
-    public static void animate(Player p1, Player p2, int prevHp1, int prevHp2, String diceDisplay) throws InterruptedException {
+    public static void animate(Player p1, Player p2, int prevHp1, int prevHp2, String diceDisplay)
+            throws InterruptedException {
         int target1 = p1.hp;
         int target2 = p2.hp;
 

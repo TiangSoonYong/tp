@@ -1,2 +1,2 @@
 1
-fdsfdsgfsgdfs | 100 | 100 | 5 | 3 | Armor -1 | Boots -1 | Weapon -1 | 0 | 50 | 100
+43645636534546e | 100 | 100 | 5 | 3 | Armor -1 | Boots -1 | Weapon -1 | 0 | 50 | 100

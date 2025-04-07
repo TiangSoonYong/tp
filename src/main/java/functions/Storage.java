@@ -61,6 +61,7 @@ public class Storage {
 
             fw.close();
             UI.printMessage("✅ Game saved to save slot " + saveSlot);
+            UI.halt();
         } catch (IOException e) {
             throw new RolladieException("❌ Save failed: " + e.getMessage());
         }
@@ -74,10 +75,8 @@ public class Storage {
     public static Game loadGame(int saveSlot) throws RolladieException {
         String filename = FILE_NAME + saveSlot + FILE_TYPE;
         File f = new File(FILE_DIRECTORY + filename);
-        Scanner s;
         try {
-            s = new Scanner(f);
-
+            Scanner s = new Scanner(f);
             int wave = Integer.parseInt(s.nextLine().trim());
 
             String[] playerData = s.nextLine().split(LOAD_DELIMITER);
@@ -87,9 +86,10 @@ public class Storage {
             return new Game(player, wave);
 
         } catch (FileNotFoundException e) {
-            throw new RolladieException("savefile.txt not found!");
+             throw new RolladieException("savefile.txt not found!");
         } catch (RolladieException e) {
             UI.printErrorMessage("❌ Load failed: " + e.getMessage() + "\nStarting new game instead");
+            UI.halt();
         }
         return new Game();
     }

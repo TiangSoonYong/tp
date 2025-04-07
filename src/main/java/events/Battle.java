@@ -14,6 +14,7 @@ import functions.DiceBattleAnimation;
 import functions.TypewriterEffect;
 import exceptions.RolladieException;
 import functions.UI.Narrator;
+import functions.UI.UI;
 import functions.UI.BattleDisplay;
 import functions.UI.HpBar;
 
@@ -37,7 +38,7 @@ public class Battle extends Event {
     @Override
     public void run() {
         try {
-            startGameLoop(this.player, this.wave, new Scanner(System.in));
+            startGameLoop(this.player, this.wave);
         } catch (InterruptedException | RolladieException e) {
             System.out.println(e.getMessage());
         }
@@ -49,10 +50,13 @@ public class Battle extends Event {
      *
      * @param player  player character
      * @param wave    the number of enemies encountered so far
-     * @param scanner
      * @throws InterruptedException
      */
-    public void startGameLoop(Player player, int wave, Scanner scanner) throws InterruptedException, RolladieException {
+    public void startGameLoop(Player player, int wave) throws InterruptedException, RolladieException {
+        assert player != null: "player cannot be null";
+        assert player.isAlive(): "player must be alive";
+        assert wave > 0: "Number of enemy encountered must be at least 1";
+
         System.out.println("🌊 Encounter " + wave + " begins!");
 
         if (!this.enemy.isAlive()) {
@@ -89,6 +93,8 @@ public class Battle extends Event {
      * Creates a new enemy when the previous one is defeated, increasing difficulty as wave progresses
      */
     public static Player generateNewEnemy(int wave) {
+        assert wave > 0: "Number of enemy encountered must be at least 1";
+
         Weapon claws = new Weapon("Claws", 1 + wave / 2);
         Armor hide = new Armor("Hide", 1 + wave / 2);
         List<Equipment> equipmentList = new ArrayList<Equipment>(List.of(hide, new EmptySlot(), claws));
@@ -108,6 +114,9 @@ public class Battle extends Event {
      * @throws InterruptedException
      */
     private void startBattle(Player player1, Player player2) throws InterruptedException, RolladieException {
+        assert player1 != null: "player1 cannot be null";
+        assert player2 != null: "player2 cannot be null";
+
         int round = 1;
 
         while (player1.isAlive() && player2.isAlive()) {
@@ -171,14 +180,14 @@ public class Battle extends Event {
 
             if (round == 5 && !player1.hasAbility("Whirlwind")) {
                 player1.abilities.add(new Whirlwind());
-                TypewriterEffect.print("[Narrator] 🔥 " + player1.name + " has unlocked a new ability: Whirlwind!");
+                TypewriterEffect.print("[Narrator] 🔥 " + player1.name + " has unlocked a new ability: Whirlwind!", 1000);
             }
         }
         if (player1.isAlive()) {
             hasWon = true;
         }
 
-        TypewriterEffect.print("\n🏁 " + (player1.isAlive() ? player1.name : player2.name) + " wins the battle!");
+        TypewriterEffect.print("\n🏁 " + (player1.isAlive() ? player1.name : player2.name) + " wins the battle!", 1000);
     }
 
     private boolean tryToFlee(Player player1, Player player2) throws InterruptedException {

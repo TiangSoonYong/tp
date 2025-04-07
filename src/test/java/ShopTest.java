@@ -4,14 +4,11 @@ import equipments.armors.ArmorDatabase;
 import equipments.boots.BootsDatabase;
 import equipments.weapons.WeaponDatabase;
 import events.Shop;
-import exceptions.RolladieException;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

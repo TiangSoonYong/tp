@@ -43,6 +43,8 @@ public abstract class Equipment {
 
     @Override
     public boolean equals(Object obj) {
+        assert obj != null:"object cannot be null";
+
         // First check if the obj is of type Equipment
         if (this == obj) {
             return true;  // If both references are the same, they're equal

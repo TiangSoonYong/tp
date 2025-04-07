@@ -287,7 +287,7 @@ public class Player {
         chosenAbility.startCooldown();
         power = Math.max(0, power - chosenAbility.powerCost); // in case AI has no viable ability and has to revert to basic attack
 
-        TypewriterEffect.print("[Narrator] " + name + " uses " + chosenAbility.name);
+        TypewriterEffect.print("[Narrator] " + name + " uses " + chosenAbility.name, 800);
         Thread.sleep(0);
         return chosenAbility;
     }

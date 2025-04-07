@@ -46,6 +46,8 @@ public abstract class Ability {
      * @return true if the cooldown is complete and there's sufficient power, false otherwise
      */
     public boolean isReady(int currentPower) {
+        assert currentPower >= 0: "power must not be negative";
+
         return currentCoolDown == 0 && currentPower >= powerCost;
     }
 
