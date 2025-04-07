@@ -36,6 +36,7 @@ public class Rolladie {
                         UI.showContinueScreen(game);
                     } catch (RolladieException e) {
                         UI.printErrorMessage(e.getMessage());
+                        UI.halt();
                         game = new Game();
                     }
                     break;

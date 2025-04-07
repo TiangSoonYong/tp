@@ -61,7 +61,6 @@ public class Storage {
 
             fw.close();
             UI.printMessage("✅ Game saved to save slot " + saveSlot);
-            UI.halt();
         } catch (IOException e) {
             throw new RolladieException("❌ Save failed: " + e.getMessage());
         }
@@ -89,7 +88,6 @@ public class Storage {
              throw new RolladieException("savefile.txt not found!");
         } catch (RolladieException e) {
             UI.printErrorMessage("❌ Load failed: " + e.getMessage() + "\nStarting new game instead");
-            UI.halt();
         }
         return new Game();
     }
