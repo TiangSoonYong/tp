@@ -54,13 +54,13 @@ public class Shop extends Event {
             isDone = true;
             break;
         default:
-            UI.printErrorMessage("You can only use \"buy\", \"sell\" or \"leave\" bro");
+            throw new RolladieException("You can only use \"buy\", \"sell\" or \"leave\" bro");
         }
     }
 
     private void handleBuyInput(int buyInput) throws RolladieException, InterruptedException {
         if (buyInput > equipments.length || buyInput < 1) {
-            UI.printErrorMessage("Buy index out of range!");
+            throw new RolladieException("Buy index out of range!");
         }
         Equipment equipment = equipments[buyInput - 1];
         boolean hasBought = player.buyEquipment(equipment);
@@ -73,7 +73,7 @@ public class Shop extends Event {
 
     private void handleSellInput(int sellInput) throws RolladieException, InterruptedException {
         if (sellInput >= 3 || sellInput < 0) {
-            UI.printErrorMessage("Buy index out of range!");
+            throw new RolladieException("Sell index out of range!");
         }
         Equipment equipment = player.getEquipment(sellInput);
 
@@ -81,7 +81,7 @@ public class Shop extends Event {
             player.sellEquipment(sellInput);
             Narrator.commentOnShopSell(player, equipment);
         } else {
-            UI.printErrorMessage("Equipment Type not Equipped!");
+            UI.printErrorMessage("No Equipment at this slot!");
         }
     }
 

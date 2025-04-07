@@ -120,57 +120,11 @@ After every battle, there will be a loot event!
 If you defeated the enemy, the loot event will grant you gold.
 If you fled from the enemy, no gold for you!
 
-### Buying and Selling in the shop
+### Purchasing from the shop
 
-Every 2 waves, the player will be able to purchase Equipment from the Shop. These Equipment consists of Armor, Boots, Weapon. 
+Every 2 waves, the player will be able to purchase Equipment from the Shop. These Equipment consists of Armor, Boots, Weapon. They improve the stats of the the player, so that the player can potentially defeat stronger and stronger enemies.
 
-Upon entering the Shop, the equipment on sale will be shown with their costs. There will be three commands to choose from. This is the main shop screen.
-
-![](images/rolladie_shop_entry.png)
-
-To select a command, just enter the corresponding index of the command.
-
-Entering "1", will select [1. Buy] and buy instructions will be shown.
-
-![](images/rolladie_buy_instructions.png)
-
-Entering an index within the list of equipments on sale will attempt purchase the corresponding equipment.
-
-It will be successful only if the player has enough gold.
-
-In this example, the user enters "2" to buy "Leather Soles", and it is successfully equipped:
-
-![](images/rolladie_buy_success.png)
-
-In this example, the user enters "2" to buy "Leather Soles", but the purchase does not go through due to insufficient gold:
-
-![](images/rolladie_buy_fail.png)
-
-After a command is executed, the main shop screen will be shown again.
-
-Entering "2", will select [2. Sell]. Sell instructions and a list of equipment Types will be shown.
-
-![](images/rolladie_sell_instructions.png)
-
-Entering an index within the list of equipment types will attempt to sell the Equipment owned by the player with the corresponding equipment type.
-
-It will be successful only if the player owns such an equipment type.
-
-In this example, the user enters "1" to sell the "Leather Soles" previously equipped. The user earns 5 gold, which is half the price of "Leather Soles".
-
-![](images/rolladie_sell_success.png)
-
-Since the "Leather Soles" are already sold, the player is left with an empty equipment slot for boots.
-
-Therefore, trying to sell boots again will be a failure, as illustrated in the example below.
-
-![](images/rolladie_sell_fail.png)
-
-Entering "3" in the main shop screen will select [3. Exit the Shop] and proceed to the next event.
-
-![](images/rolladie_shop_exit.png)
-
-.
+After buying or selling equipment, the players new equipment and stats will be shown.
 
 
 ### Saving the game
@@ -180,10 +134,6 @@ The game will periodically ask you to save the game at checkpoints. Type `y` whe
 ### Exiting the game
 
 At any point in the game when it asks for input, you can insert the command, `exit`, to quit the game. Do note however, that any unsaved progress will be lost!
-
-### Game Rounds
-
-The total number of battle rounds is 10. The goal is to win the 10th round of the game to beat the game.
 
 ## Command Summary
 
