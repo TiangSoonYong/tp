@@ -32,25 +32,18 @@ Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-da
 
 
 ## Contributions to UG
-- Wrote the base template for user guide.
-- Complete components listed below:
-  - Table content (add links to each section of user guide)
-  - Introduction (Introduce Rolladie to the user)
-  - Quick start (include explanation on running jar file)
-  - Command summary (listed out possible commands in RollaDie)
-- Draft out feature component
-- Wrote explanation and include example usage for features.
+- Wrote the base template for user guide, draft out feature component,eplanation and include example usage for features.
+- Complete component: table content (add links to each section of user guide), introduction
+(Introduce Rolladie to the user),quick start (include explanation on running jar file),
+command summary (listed out possible commands in RollaDie)
 
 ## Contributions to DG
 - Wrote the base template for developer guide.
-- Authored overview section, implementation details section and diagram section for both attack and defend feature.
-- Completed acknowledgement, setting up and getting started, product scope (target user, value proposition)
+- Completed acknowledgement, overview, setting up and getting started, product scope (target user, value proposition)
 and user stories component.
-- Draft out component details and wrote details for components such as main, storage, exception.
-- Created UML diagrams as listed below:
-    - Class Diagram (Exception class)
-    - Sequence Diagram: attack, heal feature (revised by members)
-    - Architecture diagram (revised by members)
+- Draft out component details and wrote implementation details for attack and defend feature. (revised by members)
+- Created UML diagrams( revised by members): exception class diagram,
+sequence diagram: attack, heal feature, architecture diagram
 
 ## Contributions to team-based tasks
 * Maintain issue tracker
