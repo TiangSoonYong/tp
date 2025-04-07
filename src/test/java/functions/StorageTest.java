@@ -19,16 +19,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StorageTest {
-    int testWave = 100;
     Player testPlayer;
     List<Equipment> testEquipments = new ArrayList<Equipment>(List.of(new Tshirt(), new Slippers(), new Stick()));
+    String testFileDirectory = "src/test/data/StorageTest/";
+    String testFileName = "testFile";
+    Storage testStorage = new Storage(testFileDirectory, testFileName);
 
     @Test
     public void saveAndLoad_equals() throws RolladieException {
         testPlayer = generateTestPlayer();
         int saveSlot = 100;
-        Storage.saveGame(saveSlot, testWave, testPlayer);
-        Game loadedGame = Storage.loadGame(saveSlot);
+        int testWave = saveSlot;
+        testStorage.saveGame(saveSlot, testWave, testPlayer);
+        Game loadedGame = testStorage.loadGame(saveSlot);
         Player loadedPlayer = loadedGame.getPlayer();
         int loadedWave = loadedGame.getWave();
         assertEquals(loadedWave, testWave);
@@ -47,13 +50,21 @@ public class StorageTest {
     @Test
     public void invalidEquipment_startNewGame() {
         int saveSlot = 101;
-        assertThrows(NoSuchElementException.class, () -> Storage.loadGame(saveSlot));
+        assertThrows(NoSuchElementException.class, () -> testStorage.loadGame(saveSlot));
     }
 
     @Test
-    public void invalidSaveSlot_startNewGame() {
+    public void invalidSaveSlot_throwException() {
         int saveSlot = 102;
-        assertThrows(RolladieException.class, () -> Storage.loadGame(saveSlot));
+        assertThrows(RolladieException.class, () -> testStorage.loadGame(saveSlot));
+    }
+
+    @Test
+    public void invalidFilePath_throwException() {
+        String testFileDirectory = "INVALID";
+        testStorage = new Storage(testFileDirectory, testFileName);
+        testPlayer = generateTestPlayer();
+        assertThrows(RolladieException.class, () -> testStorage.saveGame(0,0, testPlayer));
     }
 
     private Player generateTestPlayer() {

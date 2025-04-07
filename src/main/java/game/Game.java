@@ -163,7 +163,7 @@ public class Game {
         String saveInput = UI.readInput();
         if (saveInput.equalsIgnoreCase("y")) {
             int saveSlot = UI.promptSaveFile();
-            Storage.saveGame(saveSlot, wave, this.player);
+            new Storage().saveGame(saveSlot, wave, this.player);
             UI.halt();
         }
     }
