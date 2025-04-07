@@ -39,7 +39,7 @@ public class Battle extends Event {
     public void run() {
         try {
 
-            startGameLoop(this.player, this.wave, UI.SCANNER);
+            startGameLoop(this.player, this.wave);
         } catch (InterruptedException | RolladieException e) {
             System.out.println(e.getMessage());
         }

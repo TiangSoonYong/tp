@@ -36,8 +36,9 @@ public class PlayerTest {
 
     @Test
     public void createNewPlayer_validInput_playerIsAlive(){
-        String simulatedInput = "TestHero\n\n\n\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        String simulatedInput = "TestHero\n";
+        ByteArrayInputStream testInput = new ByteArrayInputStream(simulatedInput.getBytes());
+        Player.resetScanner(testInput);
         Player player = Player.createNewPlayer();
         assertTrue(player.isAlive());
     }

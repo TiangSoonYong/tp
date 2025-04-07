@@ -1,6 +1,5 @@
 package equipments;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +11,7 @@ public class EquipmentTest {
 
     private Equipment sword;
     private Equipment shield;
+
 
     @BeforeEach
     public void setUp() {
@@ -91,5 +91,9 @@ public class EquipmentTest {
         public int getId() {
             return 0;
         }
+
+        public String toText(){
+            return "test";
+        };
     }
 }

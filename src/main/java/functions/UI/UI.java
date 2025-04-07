@@ -4,6 +4,7 @@ import players.Player;
 
 import game.Game;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -16,27 +17,31 @@ public class UI {
      */
     public static final String LINE_SEPARATOR = "=====================================================================";
 
-    public static final Scanner SCANNER = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void nextLine() {
-        SCANNER.nextLine();
+        scanner.nextLine();
+    }
+
+    public static void resetScanner(InputStream in) {
+        scanner = new Scanner(in);
     }
 
     public static String storageWave() {
-        return SCANNER.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
     public static String[] storagePlayerData(String LOAD_DELIMITER) {
-        return SCANNER.nextLine().split(LOAD_DELIMITER);
+        return scanner.nextLine().split(LOAD_DELIMITER);
     }
 
     public static String readInput() {
-        String inputLine = SCANNER.nextLine().toLowerCase();
+        String inputLine = scanner.nextLine().toLowerCase();
         return inputLine;
     }
 
     public static int readIntegerInput() throws InterruptedException {
-        String input = SCANNER.nextLine().trim();
+        String input = scanner.nextLine().trim();
         int intInput = -1;
         try {
             intInput = Integer.parseInt(input);
@@ -119,7 +124,7 @@ public class UI {
 
         System.out.println("🌊 Current Wave: " + wave);
         System.out.println("\nPress Enter to continue...");
-        SCANNER.nextLine();
+        scanner.nextLine();
     }
 
 }

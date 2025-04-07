@@ -1,6 +1,7 @@
 package players;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -74,6 +75,10 @@ public class Player {
         this.equipmentList = new ArrayList<>(List.of(new EmptySlot(), new EmptySlot(), new EmptySlot()));
         this.isHuman = true;
         this.gold = 0;
+    }
+
+    public static void resetScanner(InputStream in) {
+        scanner = new Scanner(in);
     }
 
     public int getGold() {
