@@ -1,4 +1,3 @@
-//@@author Vincesum
 package equipments.boots;
 
 import equipments.EmptySlot;

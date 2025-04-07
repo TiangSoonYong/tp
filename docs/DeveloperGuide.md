@@ -288,48 +288,40 @@ or false depending on whether the player won or fled from the battle.
 ![Sequence Diagram](uml_image/lootSequenceDiagram.png)
 
 
-### 6. Buy
+
+### 6. Load        
+{To be Updated}          
+
 **Overview**
-The buy feature in Rolladie allows the player to equip themselves with stronger equipment by spending their gold.
-This feature enables players to be strong enough to put up a fight with the stronger enemies as the wave number progresses.
-The player cannot buy equipment that is too expensive.
-Buying an Equipment type that the player already has will automatically remove it and replace it with the bought equipment. 
-Player will not gain gold when equipment is removed this way.
 
 **Implementation Details**
-1. After every even-numbered enemy encounter, the player will be sent to **Shop**.
-2. The main shop screen will display the player's gold amount, a list of **Equipment** and its details for the user to buy, each marked with an index, and a list of commands to select.
-3. If the player want to buy an equipment, they will input 1 to select [1. Buy].
-4. The shop will then print instructions on how to buy the desired equipment, that is, enter the index of it.
-5. If the player has enough gold, the player will equip the current equipment, and the value of the equipment will be deducted from the gold of the player.
-6. Any existing equipment of the same type as the bought equipment will be automatically removed, but the player do not gain gold from such a removal.
-7. The **Player** toString() method will be called to show the new stats and equipment of the player, then return to the main shop screen.
-8. If the player does not have enough gold, the game will only print "not enough gold" and return to the main shop screen.
-9. In the main shop screen, they can input 3 to select [3. Exit the Shop] to exit the Shop.
 
 **Sequence Diagram**
-![Sequence Diagram](uml_image/buySequenceDiagram.png)
 
-### 6. Sell
+### 7. Save       
+{To be Updated}            
 **Overview**
-The sell feature in Rolladie allows the player to sell old equipment to earn gold, so that they can better afford higher-end equipment in the shop.
-This feature enables players to have an additional way to gain gold, as well as remove equipment they no longer want..
-The player cannot sell equipment types they do not have.
 
 **Implementation Details**
-1. After every even-numbered enemy encounter, the player will be sent to **Shop**.
-2. The main shop screen will display the player's gold amount, a list of **Equipment** and its details for the user to buy, each marked with an index, and a list of commands to select.
-3. If the player want to buy an equipment, they will input 1 to select [2.Sell].
-4. The shop will then print instructions on how to sell the desired equipment and the index for the three types of equipment.
-5. If the Player does not own the Equipment type selected, an error message will be printed and the player will return to the main shop screen.
-6. If the Player owns the Equipment type selected, an amount of gold equal to equipment.getValue() will be earned by the Player, and the equipment will be removed.
-7. The **Player** toString() method will be called to show the new stats and equipment of the player, then return to the main shop screen.
-8. In the main shop screen, they can input 3 to select [3. Exit the Shop] to exit the Shop.
 
 **Sequence Diagram**
-![Sequence Diagram](uml_image/sellSequenceDiagram.png)
 
 
+### 8. Shop
+{To be Updated}       
+**Overview**
+
+**Implementation Details**
+
+**Sequence Diagram**
+
+### 9. Loot
+{To be Updated}       
+**Overview**
+
+**Implementation Details**
+
+**Sequence Diagram**
 
 
 ## Appendix

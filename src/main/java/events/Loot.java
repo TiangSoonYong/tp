@@ -1,6 +1,6 @@
 package events;
+//@@author Vincesum
 
-import functions.UI.Narrator;
 import players.Player;
 import exceptions.RolladieException;
 import functions.UI.LootUI;
@@ -27,10 +27,8 @@ public class Loot extends Event {
             int loot = generateRandomLoot();
             player.earnGold(loot);
             LootUI.printLoot(loot);
-            Narrator.commentOnLootEntry();
         } else {
             LootUI.printNoLoot();
-            Narrator.commentOnLootDefeat();
         }
         LootUI.halt();
     }
