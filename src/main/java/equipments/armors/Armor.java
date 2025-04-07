@@ -1,3 +1,5 @@
+
+//@@author vincesum
 package equipments.armors;
 
 import equipments.Equipment;

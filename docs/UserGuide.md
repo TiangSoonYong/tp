@@ -162,6 +162,11 @@ A: The game will not accept the input and will prompt for another valid one.
 
 A: Remaining HP is a measure of your character's durability against incoming damage. When HP falls to zero, your character also falls. Power acts like mana as seen frequently in other games of such genre, in that it is an ability casting requirement to prevent skill spamming, but also gives you a damage boost the more you stack it. So it helps add strategic depth. Cooldown applies to individual skills so that players are forced to choose their combat sequence tactically for the best outcome.
 
+**Q: What is the difficulty of the game?**
+
+A: The enemy will get stronger as the battles progresses, until the player reaches the final enemy. Therefore, players have to upgrade themself through the loot
+and shop events that occur after battles, with loot appearing after every battle and shop appearing after every 2 battles.
+
 **Q: What happens if I close the application without using the `exit` command?**
 
 A: Any previously saved progress will remain available. However, if there are any progress made between the point of exit and the point of last save, then those progress will be lost.
