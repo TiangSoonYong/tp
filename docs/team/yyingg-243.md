@@ -8,14 +8,13 @@ has a simple text-ui display that reminisces games of the 1960s.
 and it aims to provide a fun and replayable experience!
 
 # Summary of Contributions
-## Code contributed
 Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=yyingg-243&breakdown=true)
 
 ## Enhancements implemented
 1. Roll dice 
   - Implemented the roll dice feature using Java's random library to simulate dice roll.
-  - Dice outcome is important in determining bonus points used during attack and defend action.
-  - Rolling dice is crucial to the turn-based mechanics of the game by introducing randomness into the game.
+  - Dice outcome is important in determining bonus points in game.
+  - Rolling dice is crucial to the turn-based mechanics by introducing randomness into the game.
 
 2. Damage calculation logic
   - Refactored the attack logic to separate damage calculation into its own method.
@@ -33,8 +32,8 @@ Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-da
 
 ## Contributions to UG
 - Wrote the base template for user guide, draft out feature component,eplanation and include example usage for features.
-- Complete component: table content (add links to each section of user guide), introduction
-(Introduce Rolladie to the user),quick start (include explanation on running jar file),
+- Complete component: table content (adding links), introduction
+(introduce Rolladie to the user),quick start (include explanation on running jar file),
 command summary (listed out possible commands in RollaDie)
 
 ## Contributions to DG
@@ -42,11 +41,10 @@ command summary (listed out possible commands in RollaDie)
 - Completed acknowledgement, overview, setting up and getting started, product scope (target user, value proposition)
 and user stories component.
 - Draft out component details and wrote implementation details for attack and defend feature. (revised by members)
-- Created UML diagrams( revised by members): exception class diagram,
+- Created UML diagrams(revised by members): exception class diagram,
 sequence diagram: attack, heal feature, architecture diagram
 
 ## Contributions to team-based tasks
 * Maintain issue tracker
-* Engaged in group discussion
 * Set up milestones and linked it to relevant issues
-* Reviewed PRs submitted by team members
+* Reviewed PRs submitted by team members and engaged in group discussion
