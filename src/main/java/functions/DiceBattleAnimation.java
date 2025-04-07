@@ -2,7 +2,10 @@ package functions;
 
 import java.util.Random;
 
+import functions.UI.UI;
+
 public class DiceBattleAnimation {
+    private static volatile boolean skipAnimation = false;
 
     private static final String[][] DICE_ART = {
         {
@@ -55,6 +58,24 @@ public class DiceBattleAnimation {
         animateBattle(player1Faces, player2Faces);
     }
 
+    public static void animateBattleWithInterrupt(int[] player1Rolls, int[] player2Rolls) throws InterruptedException {
+        skipAnimation = false;
+        Thread inputThread = new Thread(() -> {
+            try {
+                // System.in.read();
+                UI.nextLine();
+                skipAnimation = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        inputThread.setDaemon(true);
+        inputThread.start();
+
+        animateBattle(player1Rolls, player2Rolls);
+    }
+
     /**
      * Prints a dice rolling animation to the terminal
      * 
@@ -65,28 +86,31 @@ public class DiceBattleAnimation {
      */
     public static String animateBattle(int[] player1Rolls, int[] player2Rolls) throws InterruptedException {
         Random rand = new Random();
-        int frames = 0;
+        int frames = 16;
 
         for (int frame = 0; frame < frames; frame++) {
+            if (skipAnimation) {
+                break;
+            }
             int[] p1Rolls = randomRolls(player1Rolls.length, rand);
             int[] p2Rolls = randomRolls(player2Rolls.length, rand);
             
             int[] p1Offsets = generateOffsets(player1Rolls.length, frame);
             int[] p2Offsets = generateOffsets(player2Rolls.length, frame + 3); // staggered for variety
 
-            TerminalClear.clearAndWrite("🎲 Dice Rolling...\n");
+            TerminalClear.clearAndWrite("🎲 Dice Rolling...\nYour Hero ......... This Enemy\n");
 
             // System.out.println("🎲 Dice Rolling...");
             printBattleBoards(p1Rolls, p2Rolls, p1Offsets, p2Offsets);
 
-            Thread.sleep(0);
+            Thread.sleep(90);
         }
 
         // Final result frame
         String finalDiceRender = printBattleBoards(player1Rolls, player2Rolls, new int[player1Rolls.length], 
             new int[player2Rolls.length]);
 
-        TerminalClear.clearAndWrite("🎲 Final Rolls:\n" + finalDiceRender);
+        TerminalClear.clearAndWrite("🎲 Final Rolls:\nYour Hero ......... This Enemy\n" + finalDiceRender);
 
         return finalDiceRender + "\n";
     }
@@ -138,7 +162,7 @@ public class DiceBattleAnimation {
         // Add spacing between players
         for (StringBuilder line : lines) {
             while (line.length() < 12) line.append(" ");
-            line.append("     ");
+            line.append("  |   ");
         }
 
         // Draw Player 2 (right side)

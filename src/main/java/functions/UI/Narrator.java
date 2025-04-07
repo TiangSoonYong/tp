@@ -6,7 +6,7 @@ import equipments.Equipment;
 
 public class Narrator {
 
-    public static final int END_DELAY = 0;
+    public static final int END_DELAY = 800;
 
     public static void commentOnHealth(Player p) throws InterruptedException {
         double percent = p.hp / (double) p.maxHp;

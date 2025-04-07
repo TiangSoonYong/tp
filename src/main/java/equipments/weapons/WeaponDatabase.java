@@ -28,14 +28,14 @@ public class WeaponDatabase {
         return weaponList;
     }
 
-    public static int getIndexByName(String name) throws RolladieException {
-        for (int i = 0; i < weaponList.size(); i++) {
-            if (weaponList.get(i).getName().equalsIgnoreCase(name)) {
-                return i;
-            }
-        }
-        throw new RolladieException("Armor not found!");
-    }
+    // public static int getIndexByName(String name) throws RolladieException {
+    //     for (int i = 0; i < weaponList.size(); i++) {
+    //         if (weaponList.get(i).getName().equalsIgnoreCase(name)) {
+    //             return i;
+    //         }
+    //     }
+    //     throw new RolladieException("Armor not found!");
+    // }
 
     /**
      * Find Weapon based on weaponName

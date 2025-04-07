@@ -16,8 +16,19 @@ public class UI {
      */
     public static final String LINE_SEPARATOR = "=====================================================================";
 
-    private static final Scanner SCANNER = new Scanner(System.in);
+    public static final Scanner SCANNER = new Scanner(System.in);
 
+    public static void nextLine() {
+        SCANNER.nextLine();
+    }
+
+    public static String storageWave() {
+        return SCANNER.nextLine().trim();
+    }
+
+    public static String[] storagePlayerData(String LOAD_DELIMITER) {
+        return SCANNER.nextLine().split(LOAD_DELIMITER);
+    }
 
     public static String readInput() {
         String inputLine = SCANNER.nextLine().toLowerCase();

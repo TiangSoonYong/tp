@@ -1,6 +1,8 @@
 package functions;
 
-import java.util.Scanner;
+import java.io.IOException;
+
+import functions.UI.UI;
 
 public class TypewriterEffect {
     private static volatile boolean skipAnimation = false;
@@ -35,10 +37,8 @@ public class TypewriterEffect {
         Thread inputThread = new Thread(() -> {
             try {
                 // System.in.read();
-                Scanner scanner = new Scanner(System.in);
-                scanner.nextLine();
+                UI.nextLine();
                 skipAnimation = true;
-                scanner.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -48,6 +48,12 @@ public class TypewriterEffect {
         inputThread.start();
 
         print(text);
+        flushInputBuffer();
+    }
+
+    public static void printWithInterrupt(String text, int delay) throws InterruptedException {
+        printWithInterrupt(text);
+        Thread.sleep(delay);
     }
 
     /**
@@ -68,11 +74,11 @@ public class TypewriterEffect {
 
             try {
                 if (ch == '.' || ch == ',') {
-                    Thread.sleep(0);
+                    Thread.sleep(200);
                 } else if (ch == ' ') {
-                    Thread.sleep(0);
+                    Thread.sleep(30);
                 } else {
-                    Thread.sleep(0);
+                    Thread.sleep(20);
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -85,5 +91,15 @@ public class TypewriterEffect {
     public static void print(String text, int endDelay) throws InterruptedException {
         print(text);
         Thread.sleep(endDelay);
+    }
+
+    public static void flushInputBuffer() {
+        try {
+            while (System.in.available() > 0) {
+                System.in.read(); // discard input bytes
+            }
+        } catch (IOException e) {
+            // Ignore
+        }
     }
 }

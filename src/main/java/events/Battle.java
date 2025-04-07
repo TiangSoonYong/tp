@@ -14,6 +14,7 @@ import functions.DiceBattleAnimation;
 import functions.TypewriterEffect;
 import exceptions.RolladieException;
 import functions.UI.Narrator;
+import functions.UI.UI;
 import functions.UI.BattleDisplay;
 import functions.UI.HpBar;
 
@@ -37,7 +38,8 @@ public class Battle extends Event {
     @Override
     public void run() {
         try {
-            startGameLoop(this.player, this.wave);
+
+            startGameLoop(this.player, this.wave, UI.SCANNER);
         } catch (InterruptedException | RolladieException e) {
             System.out.println(e.getMessage());
         }
@@ -179,14 +181,14 @@ public class Battle extends Event {
 
             if (round == 5 && !player1.hasAbility("Whirlwind")) {
                 player1.abilities.add(new Whirlwind());
-                TypewriterEffect.print("[Narrator] 🔥 " + player1.name + " has unlocked a new ability: Whirlwind!");
+                TypewriterEffect.print("[Narrator] 🔥 " + player1.name + " has unlocked a new ability: Whirlwind!", 1000);
             }
         }
         if (player1.isAlive()) {
             hasWon = true;
         }
 
-        TypewriterEffect.print("\n🏁 " + (player1.isAlive() ? player1.name : player2.name) + " wins the battle!");
+        TypewriterEffect.print("\n🏁 " + (player1.isAlive() ? player1.name : player2.name) + " wins the battle!", 1000);
     }
 
     private boolean tryToFlee(Player player1, Player player2) throws InterruptedException {

@@ -1,7 +1,5 @@
 package functions.UI;
 
-import java.util.Scanner;
-
 public class LootUI {
     private static final String CHEST =
             "                            _.--.\n" +
@@ -40,6 +38,6 @@ public class LootUI {
 
     public static void halt() {
         System.out.println("\nPress Enter to continue...");
-        new Scanner(System.in).nextLine();
+        UI.nextLine();
     }
 }
