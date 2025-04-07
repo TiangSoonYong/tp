@@ -87,7 +87,7 @@ public class UI {
         System.out.print("Choose save slot to load (1–3): ");
         int saveSlot = Integer.parseInt(readInput());
         while(saveSlot < 1 || saveSlot > 3) {
-            System.out.print("Out of range!");
+            System.out.println("Out of range!");
             System.out.print("Choose save slot to load (1–3): ");
             saveSlot = Integer.parseInt(readInput());
         }

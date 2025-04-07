@@ -284,28 +284,35 @@ or false depending on whether the player won or fled from the battle.
 3. If hasWon in **loot** is true, add gold to player and print the loot that the player got.
 4. If hasWon in **loot** is false, print that the player got no loot.
 
-**Sequence Diagram**
+**Sequence Diagram**  
 ![Sequence Diagram](uml_image/lootSequenceDiagram.png)
 
 
+### Storage Class
+**Class Diagram**
+![Class Diagram](uml_image/StorageClassDiagram.png)
+The `Storage` class handles the translation between game data and a human-editable-file (.txt) 
+within Rolladie game. It requires `Game` attributes, namely `Player` which has a `List<Equipment>`, 
+to both implement the `toText()` method that returns an encoded string of data 
+which can then be written into the text save file.
 
-### 6. Load        
+### 6. Load  
 {To be Updated}          
 
 **Overview**
 
 **Implementation Details**
 
-**Sequence Diagram**
-
+**Sequence Diagram**  
+![Sequence Diagram](uml_image/loadSequenceDiagram.png)
 ### 7. Save       
 {To be Updated}            
 **Overview**
 
 **Implementation Details**
 
-**Sequence Diagram**
-
+**Sequence Diagram**  
+![Sequence Diagram](uml_image/saveSequenceDiagram.png)
 
 ### 8. Shop
 {To be Updated}       

@@ -158,7 +158,7 @@ public class Game {
     /**
      * Calls the Storage class to save the current game status
      */
-    public void saveGame() throws RolladieException {
+    private void saveGame() throws RolladieException {
         UI.printMessage("💾 Save game? (y/n): ");
         String saveInput = UI.readInput();
         if (saveInput.equalsIgnoreCase("y")) {
