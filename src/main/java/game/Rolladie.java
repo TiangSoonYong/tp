@@ -19,71 +19,31 @@ import game.menu.TerminalUtils;
 public class Rolladie {
 
     public static void main(String[] args) {
-        // assert false : "dummy assertion set to fail";
+        assert false : "dummy assertion set to fail";
+        UI.printWelcomeMessage();
 
-        try {
-            TerminalUtils.saveTerminalState(); // Before launching Lanterna
-            MenuSystem menuSystem = new MenuSystem();
-            menuSystem.enterPrivateMode();
-            
-            Map<String, MenuAction> mainMenu = new LinkedHashMap<>();
-
-            mainMenu.put("Start Game", () -> { 
-                Game game = new Game();
-                gameStart(game, menuSystem);
-                return false; });
-            mainMenu.put("Load Game", () -> { 
-                try {
-                    Game game = Storage.loadGame(); // May throw RolladieException
-                    gameStart(game, menuSystem);
-                } catch (RolladieException e) {
-                    UI.printErrorMessage("Failed to load game: " + e.getMessage());
-                    return true;
-                }
-                return false; });
-            mainMenu.put("Exit", () -> {
-                UI.printExitMessage();
-                System.exit(0);
-                return true;
-            });
-
-            menuSystem.displayMenu("Main Menu", mainMenu);
-
-        } catch (IOException | InterruptedException e) {
-            UI.printErrorMessage(e.getMessage());
-        }
-    }
-
-    private static void gameStart(Game game, MenuSystem menuSystem) {
-        try {
-            menuSystem.exitPrivateMode();
-            TerminalUtils.resetTerminal();
-            // Ensure console input is visible
-            System.out.print("\033[?25h"); // Show cursor (Unix)
-            System.out.flush();
-
-            game.run();
-
-            // Prepare for returning to Lanterna
-            TerminalUtils.prepareForLanterna();
-            
-            menuSystem.reinitializeTerminal(); // Add this method to MenuSystem
-            menuSystem.enterPrivateMode();
-
-        } catch (IOException | InterruptedException e) {
-            UI.printErrorMessage(e.getMessage());
-
+        String userInput = UI.readInput();
+        Game game;
+        while(!userInput.equals("exit")) {
             try {
-                TerminalUtils.resetTerminalOverkill();
-            } catch (Exception exception) {
-                UI.printErrorMessage("Error while resetting terminal overkill: " + exception.getMessage());
-
+                switch (userInput) {
+                case "start":
+                    game = new Game();
+                    break;
+                case "load":
+                    game = Storage.loadGame();
+                    break;
+                default:
+                    throw new RolladieException("Invalid option");
+                }
+                game.run();
+                UI.printWelcomeMessage();
+            } catch (RolladieException e) {
+                UI.printErrorMessage(e.getMessage());
+            } finally {
+                userInput = UI.readInput();
             }
         }
+        UI.printExitMessage();
     }
-
-    public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
-    }  
 }

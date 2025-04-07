@@ -1,7 +1,10 @@
 package functionalities.ui;
 
+import game.Game;
 import game.characters.Character;
 import game.characters.Player;
+
+import java.util.Scanner;
 
 /**
  * The UI class is responsible for handling the user interface in the text-based RPG game.
@@ -14,6 +17,13 @@ public class UI {
     public static final String LINE_SEPARATOR = "=====================================================================";
 
 
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+
+    public static String readInput() {
+        String inputLine = SCANNER.nextLine().toLowerCase();
+        return inputLine;
+    }
 
     /**
      * A string containing the ASCII art LOGO of the game.
@@ -114,6 +124,28 @@ public class UI {
 
     public static void printDeathMessage() {
         System.out.println("Narrator: Game over, you've died! L");
+        System.out.println("Press Enter to return to Main Menu...");
+        SCANNER.nextLine();
+    }
+
+    public static void showContinueScreen(Game game) {
+//        int wave = game.getWave();
+/*        Player player = game.getPlayer();
+        System.out.println("\n===== CONTINUE SCREEN =====");
+        System.out.println("👤 Name: " + player.name);
+        System.out.println("❤️ HP: " + player.hp + " / " + player.maxHp);
+        System.out.println("⚡ Power: " + player.power + " / " + player.maxPower);
+        System.out.println("🗡️ Weapon: " + player.weapon.name + " (+" + player.weapon.bonusPerDie + " dmg)");
+        System.out.println("🛡️ Armor: " + player.armor.name + " (+" + player.armor.defense + " def)");
+
+        System.out.println("🧪 Abilities:");
+        for (Ability a : player.abilities) {
+            System.out.printf("   • %s (%s) | Cooldown: %d | Cost: %d\n", a.name, a.icon, a.cooldown, a.powerCost);
+        }*/
+
+//        System.out.println("🌊 Current Wave: " + wave);
+        System.out.println("\nPress Enter to continue...");
+        SCANNER.nextLine();
     }
 }
 

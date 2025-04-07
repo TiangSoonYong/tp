@@ -14,6 +14,7 @@ import game.events.battle.Battle;
 import game.events.Event;
 import game.Game;
 import game.events.loot.Loot;
+import game.events.shop.Shop;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,9 +46,10 @@ public class Storage {
     /**
      * Saves the attributes of the game into a text file
      * defined by FILE_NAME in FILE_DIRECTORY
-     * @param player The player involved in the event.
+     *
+     * @param player       The player involved in the event.
      * @param currentEvent Event that is currently being processed in the game.
-     * @param eventsQueue Queue of upcoming events that need to be saved.
+     * @param eventsQueue  Queue of upcoming events that need to be saved.
      */
     public static void saveGame(Player player, Event currentEvent, Queue<Event> eventsQueue) throws RolladieException {
         File dir = new File(FILE_DIRECTORY);
@@ -110,18 +112,20 @@ public class Storage {
         for (int i = 0; i < parameters.length; i += 2) {
             String equipmentType = parameters[i];
             String equipmentName = parameters[i + 1];
-            switch (equipmentType) {
-            case "armor":
-                armor = Optional.of(ArmorDatabase.getArmorByName(equipmentName));
-                break;
-            case "boots":
-                boots = Optional.of(BootsDatabase.getBootsByName(equipmentName));
-                break;
-            case "weapon":
-                weapon = Optional.of(WeaponDatabase.getWeaponByName(equipmentName));
-                break;
-            default:
-                throw new RolladieException("Invalid equipment type");
+            if(!equipmentName.equals("empty")) {
+                switch (equipmentType) {
+                case "armor":
+                    armor = Optional.of(ArmorDatabase.getArmorByName(equipmentName));
+                    break;
+                case "boots":
+                    boots = Optional.of(BootsDatabase.getBootsByName(equipmentName));
+                    break;
+                case "weapon":
+                    weapon = Optional.of(WeaponDatabase.getWeaponByName(equipmentName));
+                    break;
+                default:
+                    throw new RolladieException("Invalid equipment type");
+                }
             }
         }
         return new EquipmentList(List.of(armor, boots, weapon));
@@ -130,8 +134,9 @@ public class Storage {
     /**
      * Returns subclass of Character defined by characterType
      * Decodes Character from text within savefile
+     *
      * @param characterType Type of the character to be parsed, such as "Player" or "Enemy".
-     * @param parameters The parameters from the save file,
+     * @param parameters    The parameters from the save file,
      * @return subclass of Character
      * @throws RolladieException If the characterType is invalid or error parsing the character's attributes.
      */
@@ -155,7 +160,7 @@ public class Storage {
         int maxHealth = Integer.parseInt(parameters[4]);
         if (characterType.equals("Player")) {
             int amount = Integer.parseInt(parameters[5]);
-            String[] equipmentParameters = Arrays.copyOfRange(parameters, 6, parameters.length + 1);
+            String[] equipmentParameters = Arrays.copyOfRange(parameters, 6, parameters.length);
             EquipmentList equipments = parseEquipmentListFromText(equipmentParameters);
             return new Player(healthBars, attackValue, defenseValue, characterName, maxHealth, amount, equipments);
         } else if (characterType.equals("Enemy")) {
@@ -168,7 +173,8 @@ public class Storage {
     /**
      * Returns subclass of Event defined by eventType
      * Decodes Event from text within savefile
-     * @param player The player involved in the event.
+     *
+     * @param player     The player involved in the event.
      * @param parameters The parameters from the save file, where the first element specifies the event type.
      * @return subclass of Event
      * @throws RolladieException If the eventType is not recognized or if there is an issue parsing the event details.
@@ -188,6 +194,7 @@ public class Storage {
             return new Loot(player);
         case "Shop":
             Equipment[] equipments = parseEquipmentArrayFromText(Arrays.copyOfRange(parameters, 1, parameters.length + 1));
+            return new Shop(player, equipments);
         default:
             throw new RolladieException("Invalid Event Type");
         }
@@ -223,7 +230,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new RolladieException("savefile.txt not found!");
         } catch (RolladieException e) {
-            UI.printErrorMessage("savefile.txt corrupted\nStarting new game");
+            UI.printErrorMessage("Error:" + e.getMessage() + "\nStarting new game");
         }
         return new Game();
     }

@@ -57,7 +57,7 @@ public class Character {
         this.attackValue = attack;
         this.defenseValue = defense;
         this.characterName = name;
-        this.isAlive = health[0] <= 0;
+        this.isAlive = health[0] > 0;
         this.maxHealth = maxHealth;
     }
 

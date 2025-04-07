@@ -13,18 +13,16 @@ import game.events.shop.Shop;
 import game.events.Event;
 
 import java.util.Queue;
-import java.util.Scanner;
 import java.util.LinkedList;
 
 /**
  * Manages all game logic specifically: Event Generation and Sequence
  */
 public class Game {
-    private static final int MAX_NUMBER_OF_EVENTS = 4;
+    private static final int MAX_NUMBER_OF_WAVES = 5;
     private Queue<Event> eventsQueue = new LinkedList<>();
     private Player player;
     private Event currentEvent;
-    private int score = 0;
     private int turnsWithoutShop = 0;
 
     /**
@@ -42,6 +40,7 @@ public class Game {
     /**
      * Overloaded constructor used to generate defined game
      * Main usage is within the Storage class to load game from save file
+     *
      * @param player
      * @param currentEvent
      * @param eventsQueue
@@ -57,12 +56,14 @@ public class Game {
      * Ends the game prematurely if the player died within the event
      */
     public void run() {
-        while(this.currentEvent!=null && this.player.isAlive) {
+        while (this.currentEvent != null && this.player.isAlive) {
             try {
-                saveGame();
-                this.currentEvent.run();
+                saveAndRun();
                 if (player.isAlive) {
-                    optionalShopEvent();
+                    if (isLucky()) {
+                        this.currentEvent = generateShopEvent();
+                        saveAndRun();
+                    }
                 }
                 this.currentEvent = nextEvent();
             } catch (RolladieException e) {
@@ -72,21 +73,25 @@ public class Game {
         if (!this.player.isAlive) {
             UI.printDeathMessage();
         }
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        scanner.close();
+    public void saveAndRun() throws RolladieException {
+        if (!this.currentEvent.equals(null)) {
+            saveGame();
+            this.currentEvent.run();
+        }
     }
 
 
     /**
      * Returns a filled queue of events
      * Used during the construction of a new game
+     *
      * @return eventsQueue
      */
     private Queue<Event> generateEventQueue() {
         Queue<Event> eventsQueue = new LinkedList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_EVENTS; i++) {
+        for (int i = 1; i <= MAX_NUMBER_OF_WAVES; i++) {
             eventsQueue.add(generateEvent(i));
         }
         return eventsQueue;
@@ -97,14 +102,16 @@ public class Game {
      * Current version only has a Battle event
      * Future development would include a more robust event generation
      * Idea: Interleaving the event queue with Battle and Non-Battle events
+     *
      * @return Event
      */
-    private Event generateEvent(int turn) {
-        return new Battle(this.player, turn);
+    private Event generateEvent(int wave) {
+        return new Battle(this.player, wave);
     }
 
     /**
      * returns the next event inside the event queue
+     *
      * @return Event
      */
     private Event nextEvent() {
@@ -118,24 +125,21 @@ public class Game {
         Storage.saveGame(this.player, this.currentEvent, this.eventsQueue);
     }
 
-    private void optionalShopEvent() {
+    private boolean isLucky() {
         if (Math.random() <= (0.3 + 0.2 * turnsWithoutShop)) {
             turnsWithoutShop = 0;
-            // shop entered
-            Equipment[] equipmentsForSale = {
+            return true;
+        } else {
+            turnsWithoutShop++;
+            return false;
+        }
+    }
+    private Shop generateShopEvent() {
+        Equipment[] equipmentsForSale = {
                 ArmorDatabase.getArmorByIndex((int) (Math.random() * ArmorDatabase.getNumberOfArmorTypes())),
                 BootsDatabase.getBootsByIndex((int) (Math.random() * BootsDatabase.getNumberOfBootsTypes())),
                 WeaponDatabase.getWeaponByIndex((int) (Math.random() * WeaponDatabase.getNumberOfWeaponTypes()))
-            };
-            
-            try {
-                new Shop(player, equipmentsForSale).run();
-            } catch (RolladieException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // shop not provisioned
-            turnsWithoutShop++;
-        }
+        };
+        return new Shop(player, equipmentsForSale);
     }
 }
