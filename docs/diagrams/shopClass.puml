@@ -1,0 +1,65 @@
+@startuml
+
+' Interfaces and Base Classes
+class Event {
+    - player: Player
+    + Event(player: Player)
+    + run(): void
+}
+
+' Main Class
+class Shop {
+    - equipments: Equipment[]
+    - isDone: boolean
+    + Shop(player: Player, equipments: Equipment[])
+    + run(): void
+    + handleShopInput(input: int): void
+    + handleBuyInput(buyInput: int): void
+    + handleSellInput(sellInput: int): void
+    + startShopping(): void
+}
+
+' Other Classes
+class Player {
+    + buyEquipment(equipment: Equipment): boolean
+    + sellEquipment(index: int): void
+    + getEquipment(index: int): Equipment
+}
+
+class Equipment {
+    + getId(): int
+}
+
+class UI {
+    + printErrorMessage(message: String): void
+    + readIntegerInput(): int
+}
+
+class ShopUI {
+    + printShopMenu(player: Player): void
+    + printShopCollection(equipments: Equipment[]): void
+    + printBuyInstructions(): void
+    + printSellInstructions(): void
+}
+
+class Narrator {
+    + commentOnShopEntry(): void
+    + commentOnShopExit(): void
+    + commentOnShopBuy(player: Player, equipment: Equipment): void
+    + commentOnShopSell(player: Player, equipment: Equipment): void
+}
+
+class RolladieException
+class InterruptedException
+
+' Relationships
+Shop --|> Event
+Shop ..> Player
+Shop ..> Equipment
+Shop ..> UI
+Shop ..> ShopUI
+Shop ..> Narrator
+Shop ..> RolladieException
+Shop ..> InterruptedException
+
+@enduml

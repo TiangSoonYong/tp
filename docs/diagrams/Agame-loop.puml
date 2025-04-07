@@ -1,0 +1,36 @@
+@startuml
+
+!include Style.puml
+
+hide footbox
+skinparam sequenceReferenceBackgroundColor #f7807c
+
+participant ":Game" as game gameC
+participant ":Player" as player playerC
+participant ":Storage" as storage storageC
+participant ":Event" as event eventC
+participant ":UI" as ui uiC
+
+-> game : new Game()
+activate game
+game -> player : new Player()
+activate player
+deactivate player
+game -> game : generateEvents()
+deactivate game
+-> game : run()
+activate game
+loop player.isAlive && currentEvent.hasNext
+game -> game : get next Event
+game -> event : run()
+activate event
+event -> storage : saveGame()
+deactivate event
+game -> game : increment wave
+end
+game -> ui : print GameOver
+activate ui
+deactivate ui
+ <- game : return
+ deactivate game
+@enduml

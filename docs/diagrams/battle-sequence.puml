@@ -1,0 +1,40 @@
+@startuml
+
+!include Style.puml
+
+hide footbox
+skinparam sequenceReferenceBackgroundColor #f7807c
+
+participant ":Battle" as battle gameC
+participant ":UI" as ui uiC
+participant ":Player" as player playerC
+participant ":Dice" as dice storageC
+participant ":HP" as hp eventC
+
+
+-> battle : run()
+activate battle
+battle -> battle : new enemy Player
+battle -> battle : start battle loop
+loop players.isAlive
+battle -> ui : show Player status
+battle -> player : choose player ability
+battle -> player : choose AI ability
+battle -> player : roll dice
+battle -> ui : animate dice
+ui -> dice : run()
+battle -> player : compute and apply damage
+battle -> ui : narrator commentary
+battle -> ui : animate hp
+ui -> hp : run()
+end
+
+alt player.isAlive
+battle -> player : prepare next wave
+<- battle : return
+else player.isNotAlive
+battle -> print : GameOver
+<- battle : return
+end
+
+@enduml

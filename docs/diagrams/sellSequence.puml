@@ -1,0 +1,43 @@
+@startuml
+actor Player as UI
+participant Shop
+participant ShopUI
+participant Player
+participant Equipment
+participant Narrator
+participant UI as FunctionsUI
+
+UI -> Shop : handleShopInput(2)
+activate Shop
+
+Shop -> ShopUI : printSellInstructions()
+Shop -> UI : readIntegerInput()
+activate UI
+UI --> Shop : sellInput (int)
+deactivate UI
+
+Shop -> Shop : handleSellInput(sellInput)
+activate Shop
+
+Shop -> Player : getEquipment(sellInput)
+Player --> Shop : equipment
+activate Equipment
+
+Shop -> Equipment : getId()
+Equipment --> Shop : id
+
+alt equipment exists (id != -1)
+    Shop -> Player : sellEquipment(sellInput)
+    Player --> Shop : void
+
+    Shop -> Narrator : commentOnShopSell(player, equipment)
+else no equipment
+    Shop -> UI : printErrorMessage("No Equipment at this slot!")
+end
+
+deactivate Shop
+
+@enduml
+
+
+

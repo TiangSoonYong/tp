@@ -116,11 +116,62 @@ To break it down further:
 - Finally, the equipped armor and player's defense stat will have a fixed damage reduction bonus applied on top.
 ### Looting the enemy
 
-<< in progress >>
+After every battle, there will be a loot event!
+If you defeated the enemy, the loot event will grant you gold.
+If you fled from the enemy, no gold for you!
 
-### Purchasing from the shop
+### Buying and Selling in the shop
 
-<< in progress >>
+Every 2 waves, the player will be able to purchase Equipment from the Shop. These Equipment consists of Armor, Boots, Weapon. 
+
+Upon entering the Shop, the equipment on sale will be shown with their costs. There will be three commands to choose from. This is the main shop screen.
+
+![](images/rolladie_shop_entry.png)
+
+To select a command, just enter the corresponding index of the command.
+
+Entering "1", will select [1. Buy] and buy instructions will be shown.
+
+![](images/rolladie_buy_instructions.png)
+
+Entering an index within the list of equipments on sale will attempt purchase the corresponding equipment.
+
+It will be successful only if the player has enough gold.
+
+In this example, the user enters "2" to buy "Leather Soles", and it is successfully equipped:
+
+![](images/rolladie_buy_success.png)
+
+In this example, the user enters "2" to buy "Leather Soles", but the purchase does not go through due to insufficient gold:
+
+![](images/rolladie_buy_fail.png)
+
+After a command is executed, the main shop screen will be shown again.
+
+Entering "2", will select [2. Sell]. Sell instructions and a list of equipment Types will be shown.
+
+![](images/rolladie_sell_instructions.png)
+
+Entering an index within the list of equipment types will attempt to sell the Equipment owned by the player with the corresponding equipment type.
+
+It will be successful only if the player owns such an equipment type.
+
+In this example, the user enters "1" to sell the "Leather Soles" previously equipped. The user earns 5 gold, which is half the price of "Leather Soles".
+
+![](images/rolladie_sell_success.png)
+
+Since the "Leather Soles" are already sold, the player is left with an empty equipment slot for boots.
+
+Therefore, trying to sell boots again will be a failure, as illustrated in the example below.
+
+![](images/rolladie_sell_fail.png)
+
+Entering "3" in the main shop screen will select [3. Exit the Shop] and proceed to the next event.
+
+![](images/rolladie_shop_exit.png)
+
+.
+
 
 ### Saving the game
 
@@ -129,6 +180,10 @@ The game will periodically ask you to save the game at checkpoints. Type `y` whe
 ### Exiting the game
 
 At any point in the game when it asks for input, you can insert the command, `exit`, to quit the game. Do note however, that any unsaved progress will be lost!
+
+### Game Rounds
+
+The total number of battle rounds is 10. The goal is to win the 10th round of the game to beat the game.
 
 ## Command Summary
 
@@ -156,6 +211,11 @@ A: The game will not accept the input and will prompt for another valid one.
 **Q: What is the difference between HP, Power and Cooldown?**
 
 A: Remaining HP is a measure of your character's durability against incoming damage. When HP falls to zero, your character also falls. Power acts like mana as seen frequently in other games of such genre, in that it is an ability casting requirement to prevent skill spamming, but also gives you a damage boost the more you stack it. So it helps add strategic depth. Cooldown applies to individual skills so that players are forced to choose their combat sequence tactically for the best outcome.
+
+**Q: What is the difficulty of the game?**
+
+A: The enemy will get stronger as the battles progresses, until the player reaches the final enemy. Therefore, players have to upgrade themself through the loot
+and shop events that occur after battles, with loot appearing after every battle and shop appearing after every 2 battles.
 
 **Q: What happens if I close the application without using the `exit` command?**
 

@@ -1,0 +1,9 @@
+@startuml
+actor Customer
+Customer -> ShoppingCart : Add Items
+loop 3 times
+    ShoppingCart -> Inventory : Check Stock
+    Inventory --> ShoppingCart : Stock Available
+end
+ShoppingCart --> Customer : Order Confirmed
+@enduml

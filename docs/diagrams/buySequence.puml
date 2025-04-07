@@ -1,0 +1,36 @@
+@startuml
+actor Player as UI
+participant Shop
+participant ShopUI
+participant Player
+participant Equipment
+participant Narrator
+participant UI as FunctionsUI
+
+UI -> Shop : handleShopInput(1)
+activate Shop
+
+Shop -> ShopUI : printBuyInstructions()
+Shop -> UI : readIntegerInput()
+activate UI
+UI --> Shop : buyInput (int)
+deactivate UI
+
+Shop -> Shop : handleBuyInput(buyInput)
+activate Shop
+
+Shop -> Equipment : (select from equipments[buyInput - 1])
+Shop --> Equipment : equipment
+
+Shop -> Player : buyEquipment(equipment)
+Player --> Shop : hasBought (boolean)
+
+alt hasBought == true
+    Shop -> Narrator : commentOnShopBuy(player, equipment)
+else not enough gold
+    Shop -> UI : printErrorMessage("Not enough gold!")
+end
+
+deactivate Shop
+
+@enduml

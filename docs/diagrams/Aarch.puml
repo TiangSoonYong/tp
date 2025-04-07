@@ -1,0 +1,45 @@
+@startuml
+title RollaDie\n Architecture Diagram
+
+skinparam componentStyle rectangle
+
+actor User
+
+package "Main Component" {
+    [RollaDie]
+}
+
+package "Functions Component" {
+    [UI]
+}
+
+package "Game Component" {
+    [Game]
+    [Menu]
+    [Player]
+    [Event]
+}
+
+
+package "Storage Component" {
+    [Storage]
+}
+
+package "Exception Component" {
+    [RolladieException]
+}
+
+
+User --> RollaDie : start program
+RollaDie -> Menu : display main menu
+Menu -> Game : start game loop
+RollaDie --> Storage : load game
+RollaDie --> UI : print messages
+
+Game -> Event
+Game -> Player
+Game --> UI : update UI
+Game -> Storage : save game
+Game --> RolladieException : handle errors
+
+@enduml

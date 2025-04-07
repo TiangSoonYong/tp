@@ -1,0 +1,37 @@
+@startuml
+
+!include Style.puml
+
+hide footbox
+skinparam sequenceReferenceBackgroundColor #f7807c
+
+actor Player
+
+participant ":Rolladie" as rolladie rolladieC
+participant ":UI" as ui uiC
+participant ":Game" as game gameC
+participant ":Storage" as storage storageC
+
+Player -> rolladie : run
+activate rolladie
+rolladie -> rolladie : mainMenu()
+'return
+rolladie -> ui : print Welcome
+activate ui
+deactivate ui
+loop not validUserCommand over rolladie, ui
+alt startNewGame
+rolladie -> game : new Game()
+activate game
+else loadSaveGame
+rolladie -> storage : loadGame()
+storage --> game : new Game(save)
+else exitGame
+rolladie -> ui : print Exit
+activate ui
+deactivate ui
+rolladie -> Player
+deactivate rolladie
+end
+
+@enduml
