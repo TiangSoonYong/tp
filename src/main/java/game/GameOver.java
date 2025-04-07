@@ -1,8 +1,7 @@
 package game;
 
 import functions.UI.GameOverUI;
-
-import java.util.Scanner;
+import functions.UI.UI;
 
 public class GameOver {
     private boolean hasWon;
@@ -13,12 +12,12 @@ public class GameOver {
         if (hasWon) {
             GameOverUI.printVictory();
             System.out.println("You have won the game! Enter \"enter\" to go back to main menu.");
-            new Scanner(System.in).nextLine();
+            UI.nextLine();;
         }
         else {
             GameOverUI.printGameOver();
             System.out.println("You have lost the game! Enter \"enter\" to go back to main menu.");
-            new Scanner(System.in).nextLine();
+            UI.nextLine();;
         }
     }
 }

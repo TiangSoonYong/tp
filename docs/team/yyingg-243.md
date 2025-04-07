@@ -13,7 +13,7 @@ Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-da
 
 ## Enhancements implemented
 1. Roll dice 
-  - Implemented the RollDice class using Java's random library to simulate dice roll.
+  - Implemented the roll dice feature using Java's random library to simulate dice roll.
   - Dice outcome is important in determining bonus points used during attack and defend action.
   - Rolling dice is crucial to the turn-based mechanics of the game by introducing randomness into the game.
 
@@ -26,8 +26,9 @@ Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-da
   - Correctly sets bonus points and defending status base on dice outcome and player commands.
 
 4. Improved Code reliability and security
-  - Added at least two Junit test cases for classes such as Character and RollDice to ensure correctness of logic.
+  - Added Junit test cases for classes such as Battle and Player to ensure correctness of logic.
   - Integrated assertions to validate game or character state to prevent invalid actions.
+  - Solve check style errors.
 
 
 ## Contributions to UG
@@ -38,7 +39,7 @@ Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-da
   - Quick start (include explanation on running jar file)
   - Command summary (listed out possible commands in RollaDie)
 - Draft out feature component
-- Wrote explanation and include example usage for features. (Attacking an enemy, defending against incoming attacks)
+- Wrote explanation and include example usage for features.
 
 ## Contributions to DG
 - Wrote the base template for developer guide.
@@ -48,7 +49,8 @@ and user stories component.
 - Draft out component details and wrote details for components such as main, storage, exception.
 - Created UML diagrams as listed below:
     - Class Diagram (Exception class)
-    - Sequence Diagram (attack, defend feature)
+    - Sequence Diagram: attack, heal feature (revised by members)
+    - Architecture diagram (revised by members)
 
 ## Contributions to team-based tasks
 * Maintain issue tracker
