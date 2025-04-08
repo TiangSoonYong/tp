@@ -310,7 +310,7 @@ Player will not gain gold when equipment is removed this way.
 **Sequence Diagram**
 ![Sequence Diagram](uml_image/buySequenceDiagram.png)
 
-### 6. Sell
+### 7. Sell
 **Overview**
 The sell feature in Rolladie allows the player to sell old equipment to earn gold, so that they can better afford higher-end equipment in the shop.
 This feature enables players to have an additional way to gain gold, as well as remove equipment they no longer want..

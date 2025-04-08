@@ -107,7 +107,7 @@ Here, the game continues the battle until one of the players is down. If the pla
 There are various strategies to thriving in the world of RollaDie. Careful planning of your skills to leverage on each of their strengths is crucial in maintaining the upper edge in each encounter.
 
 The damage calculation is as follows:
-\[(dice roll result) + (num of dice) * (weapon bonus)] * \[(power) / (max power) * 0.5 * (ability damage multiplier)] - (opponent armor defense)
+\[(dice roll result) + (num of dice) * (weapon bonus)  - (opponent armor defense)] * \[(power) / (max power) * 0.5 * (ability damage multiplier)]
 
 To break it down further:
 - The number of dice impacts your damage calculation two-fold, the total roll result, as well as the weapon bonus per die rolled.

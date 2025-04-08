@@ -97,11 +97,9 @@ public class Storage {
      * Returns player object defined by playerData
      * Decodes player from text within savefile
      *
-     * @param wave The current wave number the player is on.
-     * @param playerData An array of strings containing the player's data in the following order:
-     *                   [name, hp, maxHp, baseAttack, numDice, armorData,
-     *                   bootsData, weaponData, gold, power, maxPower].
-     * @return A Player object constructed using the parsed data.
+     * @param wave current wave information
+     * @param playerData player data saved
+     * @return Creates a new player with the data saved
      * @throws RolladieException If there is an error while parsing equipment or if input data is invalid.
      */
     private static Player parsePlayerFromText(int wave, String[] playerData) throws RolladieException {
