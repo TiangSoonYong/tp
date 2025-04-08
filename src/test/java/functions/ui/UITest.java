@@ -11,7 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import game.Game;
 
 /**
  * A class contains Junit test cases for UI class
