@@ -2,7 +2,7 @@ package functions;
 
 import java.util.Random;
 
-import functions.UI.UI;
+import functions.ui.UI;
 
 public class DiceBattleAnimation {
     private static volatile boolean skipAnimation = false;
@@ -161,7 +161,9 @@ public class DiceBattleAnimation {
 
         // Add spacing between players
         for (StringBuilder line : lines) {
-            while (line.length() < 12) line.append(" ");
+            while (line.length() < 12) {
+                line.append(" ");
+            }
             line.append("  |   ");
         }
 

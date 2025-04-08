@@ -1,4 +1,4 @@
-package functions.UI;
+package functions.ui;
 
 /**
  * GameOverUI class to print the end screens for the player.

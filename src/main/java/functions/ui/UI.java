@@ -1,4 +1,4 @@
-package functions.UI;
+package functions.ui;
 
 import players.Player;
 
@@ -12,6 +12,18 @@ import java.util.Scanner;
  * It displays messages related to the game, player, and enemy interactions, and renders the game's LOGO.
  */
 public class UI {
+
+    /**
+     * A string containing the ASCII art LOGO of the game.
+     */
+    public static final String LOGO =
+            " ____   " + "  ___   "+ " _      " + " _      " + "   _    " + " ____   " + " ___  " + " _____  " + "\n" +
+                    "|  _ \\ " + "  / _ \\  " + "| |     " + "| |     " + "   / \\   " + "|  _ \\  " + "|_ _| " + "| ____| " + "\n" +
+                    "| |_) |  " + "| | | | " + "| |     " + "| |     " + "  / _ \\  " + "| | | | " + " | |  " + "|  _|   " + "\n" +
+                    "|  _ <   " + "| |_| | " + "| |___  " + "| |___  " + " / /_\\ \\ " + "| |_| | " + " | |  " + "| |___  " + "\n" +
+                    "|_| \\_\\  " +"\\___/  " + "|_____| " + "|_____| " + "/_/   \\_\\" + "|____/  " + "|___| " + "|_____| ";
+
+
     /**
      * A separator string used to format the output in the UI.
      */
@@ -31,8 +43,8 @@ public class UI {
         return scanner.nextLine().trim();
     }
 
-    public static String[] storagePlayerData(String LOAD_DELIMITER) {
-        return scanner.nextLine().split(LOAD_DELIMITER);
+    public static String[] storagePlayerData(String loadDelimiter) {
+        return scanner.nextLine().split(loadDelimiter);
     }
 
     public static String readInput() {
@@ -51,16 +63,6 @@ public class UI {
         }
         return intInput;
     }
-
-    /**
-     * A string containing the ASCII art LOGO of the game.
-     */
-    public static final String LOGO =
-            " ____    " + "  ___   " + " _      " + " _      " + "    _    " + " ____   " + " ___  " + " _____  " + "\n" +
-                    "|  _ \\ " + "   / _ \\  " + "| |     " + "| |     " + "   / \\   " + "|  _ \\  " + "|_ _| " + "| ____| " + "\n" +
-                    "| |_) |  " + "| | | | " + "| |     " + "| |     " + "  / _ \\  " + "| | | | " + " | |  " + "|  _|   " + "\n" +
-                    "|  _ <   " + "| |_| | " + "| |___  " + "| |___  " + " / /_\\ \\ " + "| |_| | " + " | |  " + "| |___  " + "\n" +
-                    "|_| \\_\\  " + " \\___/  " + "|_____| " + "|_____| " + "/_/   \\_\\" + "|____/  " + "|___| " + "|_____| ";
 
     /**
      * Prints a message to the console.

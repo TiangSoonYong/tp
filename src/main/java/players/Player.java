@@ -1,30 +1,45 @@
 package players;
 
+import static functions.Storage.SAVE_DELIMITER;
+import static functions.ui.BattleDisplay.drawPowerBar;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import equipments.boots.Slippers;
 import equipments.weapons.Stick;
-import players.abilities.*;
+
 import equipments.Equipment;
 import equipments.armors.Tshirt;
 import equipments.EmptySlot;
 import functions.TypewriterEffect;
-import functions.UI.UI;
-import exceptions.RolladieException;
 
-import static functions.Storage.SAVE_DELIMITER;
-import static functions.UI.BattleDisplay.drawPowerBar;
+import functions.ui.UI;
+import exceptions.RolladieException;
+import players.abilities.Ability;
+import players.abilities.BasicAttack;
+import players.abilities.Flee;
+import players.abilities.Heal;
+import players.abilities.PowerStrike;
+import players.abilities.Whirlwind;
 
 
 /**
  * Represents player and non-player characters in the game
  */
 public class Player {
+    private static Scanner scanner = new Scanner(System.in);
+
     public String name;
-    public int hp, maxHp, baseAttack;
+    public int hp;
+    public int maxHp;
+    public int baseAttack;
     public int[] diceRolls;
     public List<Equipment> equipmentList;
     public Ability lastAbilityUsed;
@@ -35,7 +50,6 @@ public class Player {
     public int power = 50;
     public int maxPower = 100;
 
-    private static Scanner scanner = new Scanner(System.in);
 
     /**
      * Creates a Player object either controlled by a human player or computer
@@ -57,7 +71,8 @@ public class Player {
         this.gold = 0;
     }
 
-    public Player(String name, int maxHp, int baseAttack, int numDice, List<Equipment> equipmentList, boolean isHuman, int gold) {
+    public Player(String name, int maxHp, int baseAttack, int numDice,
+                  List<Equipment> equipmentList, boolean isHuman, int gold) {
         this.name = name;
         this.hp = this.maxHp = maxHp;
         this.baseAttack = baseAttack;
@@ -76,6 +91,32 @@ public class Player {
         this.isHuman = true;
         this.gold = 0;
     }
+
+    /**
+     * Overloaded constructor to load player from save file
+     */
+
+    public Player(int wave, String name, int hp, int maxHp, int baseAttack, int numDice,
+                  List<Equipment> equipmentList, int gold, int power, int maxPower) {
+        this.abilities.add(new Flee());
+        this.abilities.add(new BasicAttack());
+        this.abilities.add(new PowerStrike());
+        this.abilities.add(new Heal());
+        if (wave > 2){
+            this.abilities.add(new Whirlwind());
+        }
+        this.name = name;
+        this.hp = hp;
+        this.maxHp = maxHp;
+        this.baseAttack = baseAttack;
+        this.diceRolls = new int[numDice];
+        this.equipmentList = equipmentList;
+        this.gold = gold;
+        this.power = power;
+        this.maxPower = maxPower;
+        this.isHuman = true;
+    }
+
 
     public static void resetScanner(InputStream in) {
         scanner = new Scanner(in);
@@ -297,8 +338,7 @@ public class Player {
         }
 
         chosenAbility.startCooldown();
-        power = Math.max(0, power - chosenAbility.powerCost); // in case AI has no viable ability and has to revert to basic attack
-
+        power = Math.max(0, power - chosenAbility.powerCost);
         TypewriterEffect.print("[Narrator] " + name + " uses " + chosenAbility.name, 800);
         Thread.sleep(0);
         return chosenAbility;
@@ -327,12 +367,12 @@ public class Player {
             // Ensure Scanner is valid and handle exceptions
             if (!scanner.hasNextLine()) {
                 System.out.println("[DEBUG] Scanner has no next line. Recovering...");
-                scanner = new Scanner(System.in); // Reset scanner if needed
+                scanner = new Scanner(System.in);
             }
 
             try {
                 if (System.in.available() > 0) {
-                    scanner.nextLine();  // Consume leftover newline
+                    scanner.nextLine();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -350,7 +390,9 @@ public class Player {
                 Thread.sleep(1000);
             }
 
-            if (intInput == -1) continue;
+            if (intInput == -1){
+                continue;
+            }
 
             if (intInput <= 0 || intInput > abilities.size()) {
                 continue;
@@ -365,7 +407,6 @@ public class Player {
             } else {
                 System.out.println("On cooldown. Try another ability");
                 Thread.sleep(1000);
-                continue;
             }
         }
     }
@@ -434,8 +475,11 @@ public class Player {
     public boolean hasAbility(String name) {
         assert name != null : "ability to be searched cannot be null";
 
-        for (Ability a : abilities)
-            if (a.name.equalsIgnoreCase(name)) return true;
+        for (Ability a : abilities) {
+            if (a.name.equalsIgnoreCase(name)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -492,7 +536,9 @@ public class Player {
                 sb.append("Empty slot\n");
             }
         }
-        if(isHuman) sb.append("Gold: ").append(gold).append("\n");
+        if(isHuman){
+            sb.append("Gold: ").append(gold).append("\n");
+        }
 
         // Add abilities
         sb.append("Abilities:\n");
@@ -505,30 +551,6 @@ public class Player {
 
         // Return the final string representation
         return sb.toString();
-    }
-
-    /**
-     * Overloaded constructor to load player from save file
-     */
-
-    public Player(int wave, String name, int hp, int maxHp, int baseAttack, int numDice,
-                  List<Equipment> equipmentList,
-                  int gold, int power, int maxPower) {
-        this.abilities.add(new Flee());
-        this.abilities.add(new BasicAttack());
-        this.abilities.add(new PowerStrike());
-        this.abilities.add(new Heal());
-        if (wave > 2) this.abilities.add(new Whirlwind());
-        this.name = name;
-        this.hp = hp;
-        this.maxHp = maxHp;
-        this.baseAttack = baseAttack;
-        this.diceRolls = new int[numDice];
-        this.equipmentList = equipmentList;
-        this.gold = gold;
-        this.power = power;
-        this.maxPower = maxPower;
-        this.isHuman = true;
     }
 
     /**

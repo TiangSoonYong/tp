@@ -1,4 +1,4 @@
-package functions.UI;
+package functions.ui;
 
 public class AnsiColor {
     public static final String RESET = "\u001B[0m";

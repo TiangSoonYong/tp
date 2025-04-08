@@ -1,8 +1,6 @@
 //@@author vincesum
 package equipments.boots;
 
-import equipments.EmptySlot;
-import equipments.Equipment;
 import exceptions.RolladieException;
 
 import java.util.ArrayList;

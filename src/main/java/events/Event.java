@@ -4,9 +4,10 @@ import exceptions.RolladieException;
 import players.Player;
 
 public abstract class Event {
+    public boolean isExit = false;
     protected Player player;
     protected boolean hasWon = false;
-    public boolean isExit = false;
+
 
     public Event(Player player) {
         this.player = player;

@@ -5,11 +5,11 @@ package events;
 import players.Player;
 import equipments.Equipment;
 import exceptions.RolladieException;
-import functions.UI.UI;
-import functions.UI.ShopUI;
-import functions.UI.Narrator;
+import functions.ui.UI;
+import functions.ui.ShopUI;
+import functions.ui.Narrator;
 
-import static functions.UI.UI.readIntegerInput;
+import static functions.ui.UI.readIntegerInput;
 
 
 public class Shop extends Event {

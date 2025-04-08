@@ -11,15 +11,17 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShopTest {
 
-    private final InputStream originalSystemIn = System.in;  // Store the original System.in
+    // Store the original System.in
+    private final InputStream originalSystemIn = System.in;
 
+    // Restore the original System.in after each test
     @AfterEach
     public void restoreSystemInStream() {
-        System.setIn(originalSystemIn);  // Restore the original System.in after each test
+
+        System.setIn(originalSystemIn);
     }
 
     @Test
@@ -37,11 +39,11 @@ public class ShopTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(inputStream);
 
-        player.earnGold(100);  // Ensure player has enough gold
+        player.earnGold(100);
         try {
             shop.run();  // Execute the shop logic
             Equipment equipment = ArmorDatabase.getArmorByIndex(0);
-            assertEquals(equipment, player.getEquipment(0));  // Check if player got the correct equipment
+            assertEquals(equipment, player.getEquipment(0));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -63,9 +65,10 @@ public class ShopTest {
         Shop shop = new Shop(player, equipmentsForSale);
 
         try {
-            player.obtainEquipment(ArmorDatabase.getArmorByIndex(0));  // Equip the player with armor
-            assertEquals(ArmorDatabase.getArmorByIndex(0), player.getEquipment(0));  // Ensure player has armor
-            shop.run();  // Execute shop logic (should sell the armor)
+            player.obtainEquipment(ArmorDatabase.getArmorByIndex(0));
+            assertEquals(ArmorDatabase.getArmorByIndex(0), player.getEquipment(0));
+            // Execute shop logic (should sell the armor)
+            shop.run();
 
             // Check if the equipment was correctly sold, which is up to your implementation
         } catch (Exception e) {

@@ -15,7 +15,7 @@ import equipments.boots.BootsDatabase;
 import equipments.weapons.Weapon;
 import equipments.weapons.WeaponDatabase;
 import exceptions.RolladieException;
-import functions.UI.UI;
+import functions.ui.UI;
 import game.Game;
 import players.Player;
 
@@ -94,10 +94,12 @@ public class Storage {
      * Returns player object defined by playerData
      * Decodes player from text within savefile
      *
-     * @param wave
-     * @param playerData
-     * @return
-     * @throws RolladieException
+     * @param wave The current wave number the player is on.
+     * @param playerData An array of strings containing the player's data in the following order:
+     *                   [name, hp, maxHp, baseAttack, numDice, armorData,
+     *                   bootsData, weaponData, gold, power, maxPower].
+     * @return A Player object constructed using the parsed data.
+     * @throws RolladieException If there is an error while parsing equipment or if input data is invalid.
      */
     private static Player parsePlayerFromText(int wave, String[] playerData) throws RolladieException {
         String name = playerData[0];
@@ -118,9 +120,9 @@ public class Storage {
      * Returns list of equipment defined by equipmentsData
      * Intermediate operation for parsing player
      *
-     * @param equipmentsData
-     * @return
-     * @throws RolladieException
+     * @param equipmentsData  An array of strings, where each string represents an equipment item.
+     * @return A list containing the player's equipped armor, boots, and weapon
+     * @throws RolladieException If the equipment type is invalid or an index is out of range.
      */
     private static List<Equipment> parseEquipmentListFromText(String[] equipmentsData) throws RolladieException {
         int defaultIndex = -1;
