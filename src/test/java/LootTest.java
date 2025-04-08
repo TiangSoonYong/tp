@@ -1,8 +1,8 @@
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import players.Player;
 import org.junit.jupiter.api.Test;
 import events.Loot;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LootTest {
 
@@ -14,7 +14,7 @@ public class LootTest {
         Loot loot = new Loot(player, 10);
         loot.setHasWon(true);
         try {
-            loot.simulateRun();  // Simulate running the loot process
+            loot.simulateRun();
         } catch (Exception e) {
             e.printStackTrace();
         }

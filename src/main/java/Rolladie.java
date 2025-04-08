@@ -6,7 +6,7 @@ import functions.Storage;
 import game.Game;
 import exceptions.RolladieException;
 
-import functions.UI.UI;
+import functions.ui.UI;
 
 public class Rolladie {
 
