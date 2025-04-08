@@ -1,2 +1,2 @@
-3
-Test | 82 | 100 | 5 | 3 | Armor 0 | Boots 0 | Weapon 0 | 32 | 100 | 100
+1
+p | 100 | 100 | 5 | 3 | Armor -1 | Boots -1 | Weapon -1 | 0 | 50 | 100

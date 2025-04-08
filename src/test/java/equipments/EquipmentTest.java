@@ -1,5 +1,6 @@
 package equipments;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,6 @@ public class EquipmentTest {
 
     private Equipment sword;
     private Equipment shield;
-
 
     @BeforeEach
     public void setUp() {
@@ -92,8 +92,10 @@ public class EquipmentTest {
             return 0;
         }
 
-        public String toText(){
-            return "test";
-        };
+        @Override
+        public String toText() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'toText'");
+        }
     }
 }

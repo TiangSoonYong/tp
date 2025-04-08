@@ -3,9 +3,11 @@ package functions;
 import java.io.IOException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import equipments.Equipment;
 import equipments.armors.Armor;
@@ -72,18 +74,19 @@ public class Storage {
     public static Game loadGame(int saveSlot) throws RolladieException {
         String filename = FILE_NAME + saveSlot + FILE_TYPE;
         File f = new File(FILE_DIRECTORY + filename);
+        Scanner s;
         try {
+            s = new Scanner(f);
+            int wave = Integer.parseInt(s.nextLine().trim());
 
-            int wave = Integer.parseInt(UI.storageWave());
-
-            String[] playerData = UI.storagePlayerData(LOAD_DELIMITER);
+            String[] playerData = s.nextLine().split(LOAD_DELIMITER);
             Player player = parsePlayerFromText(wave, playerData);
 
             UI.printMessage("✅ Game loaded from save slot " + saveSlot);
             return new Game(player, wave);
 
-        // } catch (FileNotFoundException e) {
-        //     throw new RolladieException("savefile.txt not found!");
+        } catch (FileNotFoundException e) {
+            throw new RolladieException("savefile.txt not found!");
         } catch (RolladieException e) {
             UI.printErrorMessage("❌ Load failed: " + e.getMessage() + "\nStarting new game instead");
         }
