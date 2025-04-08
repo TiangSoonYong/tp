@@ -51,7 +51,7 @@ public class ShopTest {
     @Test
     public void testShop_sellEquipment_correctlyUpdatesPlayerEquipments() {
         Player player = new Player("Tom", 100, 10);
-        String simulatedInput = "2\n0\n";  // "2" to sell, "1" to select the first equipment to sell
+        String simulatedInput = "2\n0\n";  // "2" to sell, "0" to select armor to sell
         ByteArrayInputStream inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(inputStream);
 
