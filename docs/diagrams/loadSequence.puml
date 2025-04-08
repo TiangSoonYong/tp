@@ -1,0 +1,45 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #FFFFFF
+actor User
+
+participant ":Rolladie" as Rolladie
+participant "<<Class>> \n Storage" as Storage
+participant "{abstract} \n Equipment" as Equipment
+participant ":Game" as Game
+participant ":Player" as Player
+
+User -> Rolladie: Load Game
+Rolladie -> Storage: Storage.loadGame(...)
+activate Storage
+ref over Storage
+    Get int wave data
+end ref
+Storage -> Storage: Parse Player Data
+activate Storage
+    Storage -> Storage: Parse Player Equipments
+    activate Storage
+        loop 3 times
+            ref over Storage, Equipment
+                Get equipment from subclasses database
+                and add to list of equipments
+            end ref
+        end loop
+        Storage --> Storage: equipments: List<Equipment>
+    deactivate Storage
+    Storage -> Player: new Player(equipments, ...)
+    activate Player
+    Player --> Storage: :Player
+    deactivate Player
+    Storage --> Storage:
+deactivate Storage
+
+Storage -> Game: new Game(player: Player, wave: int)
+activate Game
+Game --> Storage: :Game
+deactivate Game
+Storage --> Rolladie:
+destroy Storage
+Rolladie -> Game: game.run()
+activate Game
+@enduml
