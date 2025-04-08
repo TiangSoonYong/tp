@@ -8,14 +8,13 @@ has a simple text-ui display that reminisces games of the 1960s.
 and it aims to provide a fun and replayable experience!
 
 # Summary of Contributions
-## Code contributed
 Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=yyingg-243&breakdown=true)
 
 ## Enhancements implemented
 1. Roll dice 
   - Implemented the roll dice feature using Java's random library to simulate dice roll.
-  - Dice outcome is important in determining bonus points used during attack and defend action.
-  - Rolling dice is crucial to the turn-based mechanics of the game by introducing randomness into the game.
+  - Dice outcome is important in determining bonus points in game.
+  - Rolling dice is crucial to the turn-based mechanics by introducing randomness into the game.
 
 2. Damage calculation logic
   - Refactored the attack logic to separate damage calculation into its own method.
@@ -32,28 +31,20 @@ Code contributed: [Code contributed](https://nus-cs2113-ay2425s2.github.io/tp-da
 
 
 ## Contributions to UG
-- Wrote the base template for user guide.
-- Complete components listed below:
-  - Table content (add links to each section of user guide)
-  - Introduction (Introduce Rolladie to the user)
-  - Quick start (include explanation on running jar file)
-  - Command summary (listed out possible commands in RollaDie)
-- Draft out feature component
-- Wrote explanation and include example usage for features.
+- Wrote the base template for user guide, draft out feature component,eplanation and include example usage for features.
+- Complete component: table content (adding links), introduction
+(introduce Rolladie to the user),quick start (include explanation on running jar file),
+command summary (listed out possible commands in RollaDie)
 
 ## Contributions to DG
 - Wrote the base template for developer guide.
-- Authored overview section, implementation details section and diagram section for both attack and defend feature.
-- Completed acknowledgement, setting up and getting started, product scope (target user, value proposition)
+- Completed acknowledgement, overview, setting up and getting started, product scope (target user, value proposition)
 and user stories component.
-- Draft out component details and wrote details for components such as main, storage, exception.
-- Created UML diagrams as listed below:
-    - Class Diagram (Exception class)
-    - Sequence Diagram: attack, heal feature (revised by members)
-    - Architecture diagram (revised by members)
+- Draft out component details and wrote implementation details for attack and defend feature. (revised by members)
+- Created UML diagrams(revised by members): exception class diagram,
+sequence diagram: attack, heal feature, architecture diagram
 
 ## Contributions to team-based tasks
 * Maintain issue tracker
-* Engaged in group discussion
 * Set up milestones and linked it to relevant issues
-* Reviewed PRs submitted by team members
+* Reviewed PRs submitted by team members and engaged in group discussion

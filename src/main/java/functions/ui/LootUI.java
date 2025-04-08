@@ -1,4 +1,4 @@
-package functions.UI;
+package functions.ui;
 
 public class LootUI {
     private static final String CHEST =

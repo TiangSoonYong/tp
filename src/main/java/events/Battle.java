@@ -13,15 +13,15 @@ import equipments.EmptySlot;
 import functions.DiceBattleAnimation;
 import functions.TypewriterEffect;
 import exceptions.RolladieException;
-import functions.UI.Narrator;
-import functions.UI.BattleDisplay;
-import functions.UI.HpBar;
+import functions.ui.Narrator;
+import functions.ui.BattleDisplay;
+import functions.ui.HpBar;
 
 
 import java.util.List;
 import java.util.ArrayList;
 
-import static functions.UI.Narrator.END_DELAY;
+import static functions.ui.Narrator.END_DELAY;
 
 public class Battle extends Event {
     private int wave;
@@ -100,7 +100,7 @@ public class Battle extends Event {
         Player enemy = new Player("Enemy " + wave, 30 + wave * 20, (3 + wave) / 2, 2, equipmentList, false);
 
         enemy.abilities.add(new PowerStrike());
-        if (wave >= 3) {
+        if (wave >= 3){
             enemy.abilities.add(new Crush());
         }
 
@@ -181,7 +181,8 @@ public class Battle extends Event {
 
             if (round == 5 && !player1.hasAbility("Whirlwind")) {
                 player1.abilities.add(new Whirlwind());
-                TypewriterEffect.print("[Narrator] 🔥 " + player1.name + " has unlocked a new ability: Whirlwind!", 1000);
+                TypewriterEffect.print("[Narrator] 🔥 " + player1.name +
+                        " has unlocked a new ability: Whirlwind!", 1000);
             }
         }
         if (player1.isAlive()) {

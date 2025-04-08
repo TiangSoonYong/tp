@@ -1,9 +1,0 @@
-@startuml
-actor User
-User -> System : Login Request
-opt Successful Login
-    System -> Database : Verify Credentials
-    Database --> System : Credentials Valid
-    System --> User : Welcome Message
-end
-@enduml

@@ -2,7 +2,7 @@ package functions;
 
 import java.io.IOException;
 
-import functions.UI.UI;
+import functions.ui.UI;
 
 public class TypewriterEffect {
     private static volatile boolean skipAnimation = false;

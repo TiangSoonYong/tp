@@ -1,9 +1,10 @@
-package functions.UI;
+package functions.ui;
 
 import players.Player;
 
 import game.Game;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -11,32 +12,52 @@ import java.util.Scanner;
  * It displays messages related to the game, player, and enemy interactions, and renders the game's LOGO.
  */
 public class UI {
+
+    /**
+     * A string containing the ASCII art LOGO of the game.
+     */
+    public static final String LOGO =
+            " ____      ___    _       _          _     ____    ___   _____  \n" +
+                    "|  _ \\    / _ \\  | |     | |        / \\   |  _ \\  |_ _| | ____| \n" +
+                    "| |_) |  | | | | | |     | |       / _ \\  | | | |  | |  |  _|   \n" +
+                    "|  _ <   | |_| | | |___  | |___   / /_\\ \\ | |_| |  | |  | |___  \n" +
+                    "|_| \\_\\   \\___/  |_____| |_____| /_/   \\_\\|____/  |___| |_____| ";
+
+
     /**
      * A separator string used to format the output in the UI.
      */
     public static final String LINE_SEPARATOR = "=====================================================================";
 
-    public static final Scanner SCANNER = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        System.out.println(LOGO);
+    }
 
     public static void nextLine() {
-        SCANNER.nextLine();
+        scanner.nextLine();
+    }
+
+    public static void resetScanner(InputStream in) {
+        scanner = new Scanner(in);
     }
 
     public static String storageWave() {
-        return SCANNER.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
-    public static String[] storagePlayerData(String LOAD_DELIMITER) {
-        return SCANNER.nextLine().split(LOAD_DELIMITER);
+    public static String[] storagePlayerData(String loadDelimiter) {
+        return scanner.nextLine().split(loadDelimiter);
     }
 
     public static String readInput() {
-        String inputLine = SCANNER.nextLine().toLowerCase();
+        String inputLine = scanner.nextLine().toLowerCase();
         return inputLine;
     }
 
     public static int readIntegerInput() throws InterruptedException {
-        String input = SCANNER.nextLine().trim();
+        String input = scanner.nextLine().trim();
         int intInput = -1;
         try {
             intInput = Integer.parseInt(input);
@@ -46,16 +67,6 @@ public class UI {
         }
         return intInput;
     }
-
-    /**
-     * A string containing the ASCII art LOGO of the game.
-     */
-    public static final String LOGO =
-            " ____    " + "  ___   " + " _      " + " _      " + "    _    " + " ____   " + " ___  " + " _____  " + "\n" +
-                    "|  _ \\ " + "   / _ \\  " + "| |     " + "| |     " + "   / \\   " + "|  _ \\  " + "|_ _| " + "| ____| " + "\n" +
-                    "| |_) |  " + "| | | | " + "| |     " + "| |     " + "  / _ \\  " + "| | | | " + " | |  " + "|  _|   " + "\n" +
-                    "|  _ <   " + "| |_| | " + "| |___  " + "| |___  " + " / /_\\ \\ " + "| |_| | " + " | |  " + "| |___  " + "\n" +
-                    "|_| \\_\\  " + " \\___/  " + "|_____| " + "|_____| " + "/_/   \\_\\" + "|____/  " + "|___| " + "|_____| ";
 
     /**
      * Prints a message to the console.
@@ -119,7 +130,7 @@ public class UI {
 
         System.out.println("🌊 Current Wave: " + wave);
         System.out.println("\nPress Enter to continue...");
-        SCANNER.nextLine();
+        scanner.nextLine();
     }
 
 }
