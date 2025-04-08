@@ -3,7 +3,6 @@ package events;
 import exceptions.RolladieException;
 import players.Player;
 
-
 public abstract class Event {
     public boolean isExit;
     protected Player player;

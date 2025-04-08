@@ -1,6 +1,6 @@
-import equipments.EmptySlot;
 import players.Player;
 import equipments.Equipment;
+import equipments.EmptySlot;
 import equipments.armors.ArmorDatabase;
 import equipments.boots.BootsDatabase;
 import equipments.weapons.WeaponDatabase;
@@ -15,11 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShopTest {
 
-    private final InputStream originalSystemIn = System.in;  // Store the original System.in
+    // Store the original System.in
+    private final InputStream originalSystemIn = System.in;
 
+    // Restore the original System.in after each test
     @AfterEach
     public void restoreSystemInStream() {
-        System.setIn(originalSystemIn);  // Restore the original System.in after each test
+
+        System.setIn(originalSystemIn);
     }
 
     @Test

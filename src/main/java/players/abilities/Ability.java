@@ -78,7 +78,9 @@ public abstract class Ability {
      * Decrements the cooldown time
      */
     public void tickCooldown() {
-        if (currentCoolDown > 0) currentCoolDown--;
+        if (currentCoolDown > 0) {
+            currentCoolDown--;
+        }
     }
 
     /**

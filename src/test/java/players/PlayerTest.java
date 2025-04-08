@@ -36,8 +36,9 @@ public class PlayerTest {
 
     @Test
     public void createNewPlayer_validInput_playerIsAlive(){
-        String simulatedInput = "TestHero\n\n\n\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        String simulatedInput = "TestHero\n";
+        ByteArrayInputStream testInput = new ByteArrayInputStream(simulatedInput.getBytes());
+        Player.resetScanner(testInput);
         Player player = Player.createNewPlayer();
         assertTrue(player.isAlive());
     }
@@ -45,7 +46,7 @@ public class PlayerTest {
     @Test
     public void totalRoll_checkDiceSum_sumIsCorrect(){
 
-       player.diceRolls = new int[]{5,10,12};
+        player.diceRolls = new int[]{5,10,12};
         int total = player.totalRoll();
 
         assertEquals(27, total);
@@ -53,7 +54,7 @@ public class PlayerTest {
 
 
     @Test
-    void totalRoll_NegativeRolls_sumIsCorrectlyCalculated() {
+    void totalRoll_negativeRolls_sumIsCorrectlyCalculated() {
         player.diceRolls = new int[]{-1, 5, 3};
         int total = player.totalRoll();
 
@@ -89,7 +90,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void applyDamage_largeDamage_DevastatingBlow() throws InterruptedException {
+    public void applyDamage_largeDamage_devastatingBlow() throws InterruptedException {
 
         opponent.lastAbilityUsed = new BasicAttack();
         String result = opponent.applyDamage(15, player, "Battle: ");
@@ -101,10 +102,10 @@ public class PlayerTest {
     @Test
     public void applyDamage_playerDamageIsNegative_assertionThrown()throws InterruptedException {
 
-        int player_damage = -10;
+        int playerDamage = -10;
 
         try{
-            player.applyDamage(player_damage,opponent,"Testing");
+            player.applyDamage(playerDamage,opponent,"Testing");
 
         }catch(AssertionError e){
             assertEquals("damage value must be non-negative",e.getMessage());

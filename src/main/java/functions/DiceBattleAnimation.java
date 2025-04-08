@@ -2,7 +2,7 @@ package functions;
 
 import java.util.Random;
 
-import functions.UI.UI;
+import functions.ui.UI;
 
 public class DiceBattleAnimation {
     private static volatile boolean skipAnimation = false;

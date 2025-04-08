@@ -1,4 +1,4 @@
-package functions.UI;
+package functions.ui;
 
 import players.Player;
 import functions.DiceBattleAnimation;
@@ -25,10 +25,13 @@ public class HpBar {
         int max = Math.max(Math.abs(target1 - current1), Math.abs(target2 - current2));
 
         for (int i = 0; i <= max; i++) {
-            if (current1 != target1)
+            if (current1 != target1){
                 current1 += Integer.compare(target1, current1);
-            if (current2 != target2)
+            }
+
+            if (current2 != target2){
                 current2 += Integer.compare(target2, current2);
+            }
 
             String bar1 = buildBar(current1, p1.maxHp);
             String bar2 = buildBar(current2, p2.maxHp);
@@ -41,7 +44,7 @@ public class HpBar {
             System.out.printf("%-10s : ", p2.name);
             System.out.println(bar2 + " " + current2 + "/" + p2.maxHp);
 
-//            Thread.sleep(Math.min(70 + 2 * i, 300));
+            //Thread.sleep(Math.min(70 + 2 * i, 300));
             Thread.sleep(40);
         }
     }
@@ -61,11 +64,14 @@ public class HpBar {
 
     private static String getColor(int hp, int maxHp) {
         double percent = (double) hp / maxHp;
-        if (percent >= 0.7)
+        if (percent >= 0.7) {
             return AnsiColor.GREEN;
-        else if (percent >= 0.3)
+
+        } else if (percent >= 0.3){
             return AnsiColor.YELLOW;
-        else
+        } else{
             return AnsiColor.RED;
+
+        }
     }
 }

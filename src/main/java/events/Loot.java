@@ -1,9 +1,9 @@
 package events;
 
-import functions.UI.Narrator;
+import functions.ui.Narrator;
 import players.Player;
 import exceptions.RolladieException;
-import functions.UI.LootUI;
+import functions.ui.LootUI;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package functions.UI;
+package functions.ui;
 
 import players.Player;
 import exceptions.RolladieException;
