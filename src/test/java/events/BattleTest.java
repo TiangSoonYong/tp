@@ -48,5 +48,4 @@ class BattleTest {
             assertEquals("Number of enemy encountered must be at least 1", e.getMessage());
         }
     }
-
 }

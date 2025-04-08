@@ -4,7 +4,7 @@ import events.Loot;
 import events.Shop;
 import exceptions.RolladieException;
 import functions.Storage;
-import functions.UI.UI;
+import functions.ui.UI;
 import players.Player;
 import equipments.armors.ArmorDatabase;
 import equipments.boots.BootsDatabase;
@@ -12,7 +12,6 @@ import equipments.Equipment;
 import equipments.weapons.WeaponDatabase;
 import events.Battle;
 import events.Event;
-import functions.UI.GameOverUI;
 
 import java.util.Queue;
 import java.util.LinkedList;
@@ -42,14 +41,6 @@ public class Game {
         this.currentEvent = nextEvent();
     }
 
-    public int getWave() {
-        return this.wave;
-    }
-
-    public Player getPlayer() {
-        return this.player;
-    }
-
     /**
      * Overloaded constructor used to generate defined game
      * Main usage is within the Storage class to load game from save file
@@ -63,6 +54,15 @@ public class Game {
         this.eventsQueue = generateEventQueue(wave);
         this.currentEvent = nextEvent();
     }
+
+    public int getWave() {
+        return this.wave;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
 
     /**
      * Runs the current game until the event sequence is completed
