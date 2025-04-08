@@ -4,7 +4,7 @@ skinparam sequenceReferenceBackgroundColor #FFFFFF
 actor User
 
 participant ":Game" as Game
-participant "<<Class>> \n Storage" as Storage
+participant ":Storage" as Storage
 participant ":Player" as Player
 participant "{abstract} \n Equipment" as Equipment
 
@@ -14,7 +14,11 @@ loop until game is over
     opt is Battle event
         Game->Game:saveGame()
         activate Game
-        Game->Storage: Storage.saveGame(...)
+        Game->Storage: new Storage()
+        activate Storage
+        Storage --> Game:
+        deactivate Storage
+        Game->Storage: .saveGame(...)
         activate Storage
 
         ref over Storage
@@ -46,7 +50,7 @@ end loop
 hide footbox
 skinparam sequenceReferenceBackgroundColor #FFFFFF
 
-participant "<<Class>> \n Storage" as Storage
+participant ":Storage" as Storage
 participant ":FileWriter" as FileWriter
 participant ":File" as File
 

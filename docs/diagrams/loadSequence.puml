@@ -4,13 +4,17 @@ skinparam sequenceReferenceBackgroundColor #FFFFFF
 actor User
 
 participant ":Rolladie" as Rolladie
-participant "<<Class>> \n Storage" as Storage
+participant ":Storage" as Storage
 participant "{abstract} \n Equipment" as Equipment
 participant ":Game" as Game
 participant ":Player" as Player
 
 User -> Rolladie: Load Game
-Rolladie -> Storage: Storage.loadGame(...)
+Rolladie -> Storage: new Storage()
+activate Storage
+Storage --> Rolladie:
+deactivate Storage
+Rolladie -> Storage: .loadGame(...)
 activate Storage
 ref over Storage
     Get int wave data

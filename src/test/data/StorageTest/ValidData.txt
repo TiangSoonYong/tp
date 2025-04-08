@@ -1,6 +1,0 @@
-[100] | 10 | 10 | Hero | 100
-Battle | [50] | 15 | 5 | Goblin | 50
-Battle | [50] | 15 | 5 | Goblin | 50
-Battle | [50] | 15 | 5 | Goblin | 50
-Battle | [50] | 15 | 5 | Goblin | 50
-Battle | [50] | 15 | 5 | Goblin | 50

@@ -32,7 +32,7 @@ public class Rolladie {
                 case "2":
                     int saveSlot = UI.promptSaveFile();
                     try {
-                        game = Storage.loadGame(saveSlot);
+                        game = new Storage().loadGame(saveSlot);
                         UI.showContinueScreen(game);
                     } catch (RolladieException e) {
                         UI.printErrorMessage(e.getMessage());

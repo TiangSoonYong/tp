@@ -31,22 +31,44 @@ public class Storage {
     private static final String FILE_TYPE = ".txt";
     private static final String LOAD_DELIMITER = " \\| ";
 
+    private final String fileDirectory;
+    private final String fileName;
+    private final String fileType;
+
+    /**
+     * Default constructor of Storage
+     */
+    public Storage() {
+        this.fileDirectory = FILE_DIRECTORY;
+        this.fileName = FILE_NAME;
+        this.fileType = FILE_TYPE;
+    }
+
+    /**
+     * Customized constructor of Storage
+     */
+    public Storage(String fileDirectory, String fileName) {
+        this.fileDirectory = fileDirectory;
+        this.fileName = fileName;
+        this.fileType = FILE_TYPE;
+    }
+
     /**
      * Saves the attributes of the game into a text file
-     * defined by FILE_NAME + saveSLOT + FILE_TYPE in FILE_DIRECTORY
+     * defined by fileName + saveSLOT + fileType in fileDirectory
      *
      * @param saveSlot
      * @param player
      * @param wave
      * @throws RolladieException
      */
-    public static void saveGame(int saveSlot, int wave, Player player) throws RolladieException {
-        File dir = new File(FILE_DIRECTORY);
+    public void saveGame(int saveSlot, int wave, Player player) throws RolladieException {
+        File dir = new File(this.fileName);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        String filename = FILE_NAME + saveSlot + FILE_TYPE;
-        File file = new File(FILE_DIRECTORY, filename);
+        String path = this.fileName + saveSlot + this.fileType;
+        File file = new File(this.fileDirectory, path);
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -71,12 +93,11 @@ public class Storage {
      *
      * @return Game
      */
-    public static Game loadGame(int saveSlot) throws RolladieException {
-        String filename = FILE_NAME + saveSlot + FILE_TYPE;
-        File f = new File(FILE_DIRECTORY + filename);
-        Scanner s;
+    public Game loadGame(int saveSlot) throws RolladieException {
+        String filename = this.fileName + saveSlot + this.fileType;
+        File f = new File(this.fileDirectory + filename);
         try {
-            s = new Scanner(f);
+            Scanner s = new Scanner(f);
             int wave = Integer.parseInt(s.nextLine().trim());
 
             String[] playerData = s.nextLine().split(LOAD_DELIMITER);
@@ -102,7 +123,7 @@ public class Storage {
      * @return Creates a new player with the data saved
      * @throws RolladieException If there is an error while parsing equipment or if input data is invalid.
      */
-    private static Player parsePlayerFromText(int wave, String[] playerData) throws RolladieException {
+    private Player parsePlayerFromText(int wave, String[] playerData) throws RolladieException {
         String name = playerData[0];
         int hp = Integer.parseInt(playerData[1]);
         int maxHp = Integer.parseInt(playerData[2]);
@@ -125,7 +146,7 @@ public class Storage {
      * @return A list containing the player's equipped armor, boots, and weapon
      * @throws RolladieException If the equipment type is invalid or an index is out of range.
      */
-    private static List<Equipment> parseEquipmentListFromText(String[] equipmentsData) throws RolladieException {
+    private List<Equipment> parseEquipmentListFromText(String[] equipmentsData) throws RolladieException {
         int defaultIndex = -1;
         Equipment armor = ArmorDatabase.getArmorByIndex(defaultIndex);
         Equipment boots = BootsDatabase.getBootsByIndex(defaultIndex);

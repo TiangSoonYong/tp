@@ -10,10 +10,14 @@ package functions {
         -{static} final LOAD_DELIMITER: String
         +{static} final SAVE_DELIMITER: String
 
-        +{static}saveGame(saveSlot: int, wave: int, player: Player):
-        +{static}loadGame(saveSlot: int): Game
-        -{static}parsePlayerFromText(wave: int, playerData: String[]): Player
-        -{static}parseEquipmentListFromText(equipmentsData: String[]): List<Equipment>
+        - final fileDirectory: String
+        - final fileName: String
+        - final fileType: String
+
+        +saveGame(saveSlot: int, wave: int, player: Player):
+        +loadGame(saveSlot: int): Game
+        -parsePlayerFromText(wave: int, playerData: String[]): Player
+        -parseEquipmentListFromText(equipmentsData: String[]): List<Equipment>
     }
 }
 package players {
