@@ -139,30 +139,34 @@ When the player faces against an enemy, the `StartBattle()` method is called. Th
 
 `StartBattle(Player1, Player2)` - begin battle sequence for a wave
 
+
 ### 4. Storage component
 
-The Storage Component is responsible for saving and loading Game progress.
+**Class Diagram**
+![Class Diagram](uml_image/StorageClassDiagram.png)
 
-It reads and writes Game data to a text file (savefile.txt), ensuring that players can resume their Game after closing the application.         
+The `Storage` class handles the translation between game data and a human-editable-file (.txt)
+within Rolladie game. It requires `Game` attributes, namely `Player` which has a `List<Equipment>`,
+to both implement the `toText()` method that returns an encoded string of data
+which can then be written into the text save file.
 
 The Storage class provides the following functionalities:
 
 1. Save the Game:
 
-- The `saveGame(Player, Event, Queue<Event>)` method writes player stats, the current event,
-and upcoming events to a file.
-- It converts Game objects into a text format using their `toText()` methods.
+- The `saveGame(saveSlot: int, wave: int, player: Player)` method writes the relevant data into the specified save file
+- It converts `Game` objects into a text format using their `toText()` methods.
 
 2. Load the Game:
 
-- The `loadGame()` method reads the save file and reconstructs the Game state.
-- It calls helper methods `parseCharacterFromText()` and `parseEventFromText()` to convert text data back into objects.
-- If the save file is missing or corrupted, it creates a new Game instance instead.
+- The `loadGame(saveSlot: int)` method reads the specified save file and reconstructs the Game state.
+- It calls helper methods `parsePlayeFromText(...)` and `parseEquipmentListFromText(...)` to convert text data back into `Game` objects
+- If the save file is missing or corrupted, it creates a `new Game` instance instead.
 
 3. Data Parsing:
 
-- `parseCharacterFromText()` deciphers character stats (health, attack, defense, etc.) from text.
-- `parseEventFromText()` reconstructs different Game events, such as battles, from saved data.
+- `parsePlayeFromText(...)` deciphers player stats (health, attack, defense, etc.) from text.
+- `parseEquipmentListFromText(...)` reconstructs player equipments from saved data.
 
 
 ### 5. Exception component
@@ -174,33 +178,42 @@ and upcoming events to a file.
 ## Implementation
 ## Key Features
 
-### 1. Save and Load
-**Overview**    
-The Save and Load feature in Rolladie is an important part of the game as it allows players to not lose
-their progress in the game. When the player starts the game, he/she is brought to the main menu, which allows them to select between Start Game, Load Game and Exit.
+### 1. Save
+**Overview**  
+The Save feature allows user to store their game data before proceeding into a `Battle` event.
 
-If a player chooses to start the game, they automatically start a new game. If the player chooses to load game, they will be able to choose a save slot to load from.
+**Implementation Details**
+1. During standard running of the game, if the current event is a `Battle` event, it will prompt the user to save
+2. User can then input the save file number from **1 to 3**
+3. `Storage` class is then called to save the current `Game` progress
+4. `int wave` is first saved to record the current wave the user is in
+5. `player` is then converted into an encoded `String` of text
+6. Since `player` has `equipments`, it is also converted into an encoded `String` of text
+7. Lastly, the full encoded data of the player is then saved into a save file of the user choosing
 
-**Implementation Details**     
-The Save and Load feature in RollaDie handles the storage of all player information and battle information.
-1. The process begins with the player booting up the game.
-2. The player will be greeted by the main menu, allowing the player to choose from 1-3, where 1 is
-Start Game, 2 is Load Game and 3 is exit game.
-3. If player chooses 1, a new Game object is created where player starts a new game.
-4. If player chooses 2, `loadGame()` in the Storage class will be called to fetch the serialised data, which
-is processed to load the game information, and initialise a new Game object based on the data fetched.
-5. If player chooses 3, the game exits itself.
-6. After every loot and shop event, the game also presents the users with an opportunity to save the game.
-7. If the player selects "y", the game prompts the user to choose from 1-3 to save to a save slot, else 
-if player selects "n", game does not save.
+**Sequence Diagram**  
+![Sequence Diagram](uml_image/saveSequenceDiagram.png)
 
-**Sequence Diagram**         
-     
-The sequence diagram below illustrates the process that occurs when the game boots and prompts user to load.
+### 2. Load
+**Overview**  
+The Load feature provides user the option to restore their saved data within the `Rolladie` main menu
 
-![Sequence Diagram](uml_image/saveLoadSequenceDiagram.png)
+**Implementation Details**
+1. User select to load game by inputting **2**
+2. User can then input the save file number from **1 to 3**
+3. `Storage` class is then called to load the save file
+4. `int wave` is first loaded to be used for generating events and player abilities
+5. `player` data is then parsed partially
+6. **3** equipments are then parsed from its databases to create player's `equipments`
+7. The `player` object can be fulled created with the loaded data
+8. Finally, the `game` object is created and its events generation is automatically performed
 
-### 2. Attack       
+In the scenario where the save file does not exists, `Rolladie` will simply start a new `Game`
+
+**Sequence Diagram**  
+![Sequence Diagram](uml_image/loadSequenceDiagram.png)
+
+### 3. Attack       
 **Overview**    
         
 The Attack Feature in RollaDie is a core component of the Game's battle system, allowing the player and enemy to take turns attacking each other. The feature manages input handling, attack calculations, and battle progression.
@@ -229,7 +242,7 @@ The sequence diagram below illustrates the process that occurs when the player i
 
 ![Sequence Diagram](uml_image/attackSequence.png)
 
-### 3. Heal        
+### 4. Heal        
 **Overview**
 
 The heal Feature in RollaDie allows players to adopt a heal during their turn instead of attacking.
@@ -254,7 +267,7 @@ The sequence diagram is shared with the attack feature above.
 
 
 
-### 4. Flee        
+### 5. Flee        
 **Overview**      
 The flee feature in Rolladie is to allow the player to escape from nasty situations.
 This feature allows players to make a strategic retreat to re gear up before fighting strong enemies.
@@ -271,7 +284,7 @@ When the player chooses to flee, the battle ends immediately and the player goes
 
 
 
-### 5. Loot      
+### 6. Loot      
 **Overview**
 The loot feature in Rolladie allows the player to get gold after winning a battle.
 This feature enables players to earn gold to upgrade himself in the shop.
@@ -288,7 +301,7 @@ or false depending on whether the player won or fled from the battle.
 ![Sequence Diagram](uml_image/lootSequenceDiagram.png)
 
 
-### 6. Buy
+### 7. Buy
 **Overview**
 The buy feature in Rolladie allows the player to equip themselves with stronger equipment by spending their gold.
 This feature enables players to be strong enough to put up a fight with the stronger enemies as the wave number progresses.
@@ -310,7 +323,7 @@ Player will not gain gold when equipment is removed this way.
 **Sequence Diagram**
 ![Sequence Diagram](uml_image/buySequenceDiagram.png)
 
-### 7. Sell
+### 8. Sell
 **Overview**
 The sell feature in Rolladie allows the player to sell old equipment to earn gold, so that they can better afford higher-end equipment in the shop.
 This feature enables players to have an additional way to gain gold, as well as remove equipment they no longer want..
