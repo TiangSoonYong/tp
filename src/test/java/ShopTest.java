@@ -1,5 +1,6 @@
 import players.Player;
 import equipments.Equipment;
+import equipments.EmptySlot;
 import equipments.armors.ArmorDatabase;
 import equipments.boots.BootsDatabase;
 import equipments.weapons.WeaponDatabase;
@@ -39,11 +40,11 @@ public class ShopTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(inputStream);
 
-        player.earnGold(100);
+        player.earnGold(100);  // Ensure player has enough gold
         try {
             shop.run();  // Execute the shop logic
             Equipment equipment = ArmorDatabase.getArmorByIndex(0);
-            assertEquals(equipment, player.getEquipment(0));
+            assertEquals(equipment, player.getEquipment(0));  // Check if player got the correct equipment
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -53,7 +54,7 @@ public class ShopTest {
     @Test
     public void testShop_sellEquipment_correctlyUpdatesPlayerEquipments() {
         Player player = new Player("Tom", 100, 10);
-        String simulatedInput = "2\n1\n";  // "2" to sell, "1" to select the first equipment to sell
+        String simulatedInput = "2\n0\n";  // "2" to sell, "0" to select armor to sell
         ByteArrayInputStream inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(inputStream);
 
@@ -65,16 +66,13 @@ public class ShopTest {
         Shop shop = new Shop(player, equipmentsForSale);
 
         try {
-            player.obtainEquipment(ArmorDatabase.getArmorByIndex(0));
-            assertEquals(ArmorDatabase.getArmorByIndex(0), player.getEquipment(0));
-            // Execute shop logic (should sell the armor)
-            shop.run();
-
+            player.obtainEquipment(ArmorDatabase.getArmorByIndex(0));  // Equip the player with armor
+            assertEquals(ArmorDatabase.getArmorByIndex(0), player.getEquipment(0));  // Ensure player has armor
+            shop.run();  // Execute shop logic (should sell the armor)
+            assertEquals(new EmptySlot(), player.getEquipment(0));
             // Check if the equipment was correctly sold, which is up to your implementation
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            assertEquals("Equipment is not equipped!", e.getMessage());
-            // Handle specific exceptions, or assert the expected behavior
         }
         restoreSystemInStream();
     }

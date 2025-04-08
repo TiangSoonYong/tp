@@ -1,3 +1,4 @@
+//@@author James17042002
 package equipments;
 
 public class EmptySlot extends Equipment {
