@@ -401,7 +401,7 @@ public class Player {
             // todo update the typed string for unique ability types
             Ability chosenAbility = abilities.get(intInput - 1);
             if (chosenAbility.isReady(power)) {
-                //
+
                 lastAbilityUsed = chosenAbility;
                 return chosenAbility;
             } else {
