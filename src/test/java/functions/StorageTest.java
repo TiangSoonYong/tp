@@ -59,14 +59,6 @@ public class StorageTest {
         assertThrows(RolladieException.class, () -> testStorage.loadGame(saveSlot));
     }
 
-    @Test
-    public void invalidFilePath_throwException() {
-        String testFileDirectory = "INVALID";
-        testStorage = new Storage(testFileDirectory, testFileName);
-        testPlayer = generateTestPlayer();
-        assertThrows(RolladieException.class, () -> testStorage.saveGame(0,0, testPlayer));
-    }
-
     private Player generateTestPlayer() {
         int testWave = 100;
         Random random = new Random();

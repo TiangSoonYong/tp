@@ -63,7 +63,8 @@ public class Storage {
      * @throws RolladieException
      */
     public void saveGame(int saveSlot, int wave, Player player) throws RolladieException {
-        File dir = new File(this.fileName);
+        File dir = new File(this.fileName); // Submitted code
+        //File dir = new File(this.fileDirectory); // Supposed to be
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -108,10 +109,7 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             throw new RolladieException("savefile.txt not found!");
-        } catch (RolladieException e) {
-            UI.printErrorMessage("❌ Load failed: " + e.getMessage() + "\nStarting new game instead");
         }
-        return new Game();
     }
 
     /**

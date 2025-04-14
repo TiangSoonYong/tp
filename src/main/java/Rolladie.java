@@ -35,7 +35,7 @@ public class Rolladie {
                         game = new Storage().loadGame(saveSlot);
                         UI.showContinueScreen(game);
                     } catch (RolladieException e) {
-                        UI.printErrorMessage(e.getMessage());
+                        UI.printErrorMessage("❌ Load failed: " + e.getMessage() + "\nStarting new game instead");
                         game = new Game();
                     }
                     break;

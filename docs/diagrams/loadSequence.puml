@@ -10,6 +10,8 @@ participant ":Game" as Game
 participant ":Player" as Player
 
 User -> Rolladie: Load Game
+activate Rolladie
+create Storage
 Rolladie -> Storage: new Storage()
 activate Storage
 Storage --> Rolladie:
@@ -31,13 +33,14 @@ activate Storage
         end loop
         Storage --> Storage: equipments: List<Equipment>
     deactivate Storage
+    create Player
     Storage -> Player: new Player(equipments, ...)
     activate Player
     Player --> Storage: :Player
     deactivate Player
     Storage --> Storage:
 deactivate Storage
-
+create Game
 Storage -> Game: new Game(player: Player, wave: int)
 activate Game
 Game --> Storage: :Game

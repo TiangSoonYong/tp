@@ -7,13 +7,13 @@ participant ":Game" as Game
 participant ":Storage" as Storage
 participant ":Player" as Player
 participant "{abstract} \n Equipment" as Equipment
-
 loop until game is over
     User->Game : game.run()
     activate Game
     opt is Battle event
         Game->Game:saveGame()
         activate Game
+        create Storage
         Game->Storage: new Storage()
         activate Storage
         Storage --> Game:
